@@ -1,14 +1,15 @@
-from flask import Flask,session
-from flask import render_template
-from flask import request
+from flask import Flask,session,render_template,request,url_for,flash
 from datetime import datetime
 import os
 import sqlite3
 import json
 import codecs
 import glob
+from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+
+app = Flask(__name__, instance_path='/instance')
+os.makedirs(os.path.join(app.instance_path, 'htmlfi'), exist_ok=True)
 
 
 # freq vars
@@ -17,32 +18,43 @@ track_freq = {}
 end_freq = {}
 files = [f for f in glob.glob("StreamingHistory**")]
 
+# file upload 
+ALLOWED_EXTENSIONS = {'zip'}
+
+
 
 #page
 
-@app.route("/") 
+@app.route("/",methods=['POST','GET']) 
 def homepage():
-
     #add uploading logic
+    if request.method == 'GET':
+        return render_template('index.html')
+    else:
+        if request.files:
+            f = request.files['datapackage']
 
-    for file in files:
-        data_file = codecs.open(file, encoding='utf-8')
-        json_array = json.load(data_file)
 
-        for item in json_array:
-            updateFreq(item['artistName'], artist_freq)
-            updateFreq(item['endTime'], end_freq)
-            updateTrackFreq(item['trackName'], track_freq, item)
+            for file in files:
+                data_file = codecs.open(file, encoding='utf-8')
+                json_array = json.load(data_file)
 
-        data_file.close()
+                for item in json_array:
+                    updateFreq(item['artistName'], artist_freq)
+                    updateFreq(item['endTime'], end_freq)
+                    updateTrackFreq(item['trackName'], track_freq, item)
 
-    top_tracks = list(sorted(track_freq.items(), key = lambda x : x[1][1], reverse=True)[:10])
+                data_file.close()
 
-    for item in top_tracks:
-        print(item) #move this to output
+            top_tracks = list(sorted(track_freq.items(), key = lambda x : x[1][1], reverse=True)[:10])
 
-    return render_template('index.html')
+            for item in top_tracks:
+                print(item) #move this to output
+    
 
+@app.route("/output")
+def output():
+    
 
 
 #non-page 
