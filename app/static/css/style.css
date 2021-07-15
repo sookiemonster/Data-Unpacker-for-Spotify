@@ -23,6 +23,12 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  font-size: 25pt;
+  font-weight: 600;
+  margin: 0;
+}
+
 small {
   font-size: 20pt;
   font-weight: 300;
@@ -49,6 +55,7 @@ mark {
   transform: translate(-50%, -50%);
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   width: 90vw;
   height: 90vh;
 }
@@ -56,6 +63,7 @@ mark {
 .card {
   border-radius: 15px;
   background-color: var(--dark-gray);
+  margin: 15px;
 }
 
 #overview {
@@ -66,9 +74,9 @@ mark {
   width: 600px;
   height: 800px;
   box-sizing: border-box;
-  background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(24,24,24) 100%);
-  background: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 100%);
-  background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 100%);
+  background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
+  background: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
+  background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
 }
 
 #overview > h1 {
@@ -89,4 +97,68 @@ mark {
   height: 225px;
   clip-path: circle(50%);
   margin-bottom: 30px;
+}
+
+#popularity {
+  width: 1000px;
+  height: 500px;
+  padding: 35px 32px;
+}
+
+ol {
+  list-style: none;
+  counter-reset: popularity-counter;
+  padding: 0px 10px;
+}
+
+ol li {
+  counter-increment: popularity-counter;
+}
+
+ol li::before {
+  position: relative;
+  top: -25px;
+  content: "#" counter(popularity-counter);
+  color: white;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.popular-item {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  width: 80%;
+  margin: 15px 15px 0;
+}
+
+.popular-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background-color: black;
+}
+
+.popular-description {
+  display: flex;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  height: 64px;
+  margin-left: 10px;
+  padding: 2px 4px;
+}
+
+.popular-description > span {
+  margin: 0;
+}
+
+.song-title {
+  font-size: 25px;
+  font-weight: 500;
+  color: white;
+}
+
+.song-artist {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--light-gray);
 }
