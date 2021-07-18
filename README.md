@@ -1,1 +1,1 @@
-# Spotify-Data-Visualizer
+# Data Visualizer for Spotify
