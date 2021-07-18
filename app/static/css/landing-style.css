@@ -7,7 +7,6 @@
 }
 
 body {
-  background-color: var(--dark-gray);
   color: white;
   font-family: 'Open Sans', sans-serif;
   width: 100vw;
@@ -17,15 +16,22 @@ body {
   background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
   background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
   background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+.layout-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* Header */
 
 .header-container {
-  position: absolute;
-  top: 50%;
-  left: calc(50px + 6vw);
-  transform: translateY(-50%);
+  margin: 0 calc(50px + 6vw);
   z-index: 1;
 }
 
@@ -118,10 +124,10 @@ mark {
   fill: black;
   height: 200%;
   z-index: -1;
-  animation: wave linear 3s infinite;
+  animation: wave-vertical linear 3s infinite;
 }
 
-@keyframes wave {
+@keyframes wave-vertical {
   0% {
     transform: translateY(0);
   }
@@ -133,16 +139,13 @@ mark {
 /* Choose & Upload Files */
 
 #file-page {
-  position: absolute;
-  top: 0;
-  right: 0;
+  margin-left: calc(50vw - 620px);
+  margin-right: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 50vw;
-  height: 100vh;
-  /* background-color: black; */
+  z-index: 1;
 }
 
 #data-form {
@@ -225,4 +228,23 @@ input[type="submit"] {
 
 .faq:hover {
   color: var(--sp-green);
+}
+
+@media only screen and (max-width: 1200px) {
+  .layout-container {
+    justify-content: center;
+  }
+
+  .header-container {
+    margin-top: 60px;
+  }
+
+  .icon-layout {
+    justify-content: center;
+  }
+
+  #file-page {
+    margin: 0;
+  }
+
 }
