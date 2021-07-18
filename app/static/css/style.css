@@ -3,6 +3,7 @@
   --med-gray: #5c5c5c;
   --light-gray: #cacaca;
   --sp-green: #1db954;
+  --artwork: #000000;
 }
 
 body {
@@ -134,8 +135,8 @@ ol li::before {
 .popular-icon {
   width: 64px;
   height: 64px;
-  border-radius: 6px;
-  background-color: black;
+  border-radius: 0px;
+  background-color: var(--artwork);
 }
 
 .popular-description {
