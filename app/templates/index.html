@@ -4,14 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/landing-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+  </head>
     <title>Data Visualizer for Spotify</title>
   </head>
   <body>
-    <form action="/" method='POST' enctype="multipart/form-data">
-      <div>
-        <input id="file-chooser" type="file" name='datapackage'>
-      </div>
-      <input id="upload-file" type="submit" value='Upload'>
-    </form>
+    <div class="header-container">
+      <h1><span id="margin-fix">Data</span><br>
+      Visualizer<br></h1>
+      <small>for</small>
+      <h1><mark>Spotify</mark></h1>
+    </div>
+
+    <div id="file-page">
+
+      <form id="data-form" action="/" method='POST' enctype="multipart/form-data">
+        <label for="choose-file" class="choose-button">
+          Choose file: <span id="file-selected">No file chosen</span>
+        </label>
+        <input id="choose-file" type="file" name='datapackage'/>
+
+        <label for="upload-file" class="upload-button">
+          <span>Upload Data</span>
+        </label>
+        <input id="upload-file" type="submit">
+      </form>
+
+      <a class="faq" href="https://support.spotify.com/us/article/data-rights-and-privacy-settings/">How do I get my data?</a>
+    </div>
   </body>
 </html>
