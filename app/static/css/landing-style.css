@@ -14,9 +14,9 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 30%, rgba(24,24,24,1) 100%);
-  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 30%, rgba(24,24,24,1) 100%);
-  background: linear-gradient(0deg, rgba(0,0,0,1) 30%, rgba(24,24,24,1) 100%);
+  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(24,24,24,1) 100%);
 }
 
 /* Header */
@@ -26,6 +26,7 @@ body {
   top: 50%;
   left: calc(50px + 6vw);
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 #margin-fix {
@@ -81,7 +82,7 @@ mark {
   width: 60px;
   height: 60px;
   border-radius: 10px;
-  background-color: black;
+  background-color: rgba(0,0,0,0);
   margin-right: 15px;
   transition: background-color ease-out 0.15s;
   cursor: pointer;
@@ -99,7 +100,19 @@ mark {
   background-color: var(--dark-gray);
 }
 
-/* Choose & Uploading */
+/* Wave */
+
+#wave {
+  fill: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: auto;
+  z-index: -1;
+}
+
+/* Choose & Upload Files */
 
 #file-page {
   position: absolute;
@@ -111,7 +124,7 @@ mark {
   justify-content: center;
   width: 50vw;
   height: 100vh;
-  background-color: black;
+  /* background-color: black; */
 }
 
 #data-form {
