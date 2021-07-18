@@ -23,7 +23,7 @@ body {
 .header-container {
   position: absolute;
   top: 50%;
-  left: calc(50px + 5vw);
+  left: calc(50px + 6vw);
   transform: translateY(-50%);
 }
 
@@ -61,10 +61,37 @@ mark {
   letter-spacing: .75px;
 }
 
+/* Logos & Links */
+
 #sp-logo {
   margin-left: 6px;
   transform: translateY(10px);
 }
+
+.icon-layout {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.icon-container {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: black;
+  margin-right: 15px;
+}
+
+.icon {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+}
+
 
 /* Choose & Uploading */
 
