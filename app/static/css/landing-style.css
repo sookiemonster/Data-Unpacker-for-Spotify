@@ -167,17 +167,18 @@ input[type="file"] {
 
 .choose-button {
   display: block;
+  background-color: var(--dark-gray);
   padding: 10px 15px;
   border-radius: 7px;
   font-weight: 400;
   font-size: 11pt;
   letter-spacing: 1px;
-  transition: background-color ease-out .15s, letter-spacing ease-out .2s;
+  transition: letter-spacing ease-out .1s, filter ease-out .15s;
   cursor: pointer;
 }
 
 .choose-button:hover {
-  background-color: var(--dark-gray);
+  filter: brightness(1.5);
   letter-spacing: 1.5px;
 }
 
