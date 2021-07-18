@@ -102,14 +102,32 @@ mark {
 
 /* Wave */
 
-#wave {
-  fill: black;
+#wave-container {
   position: absolute;
   top: 0;
   right: 0;
   height: 100vh;
-  width: auto;
+  width: 53vw;
+  overflow: hidden;
+}
+
+#wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: black;
+  height: 200%;
   z-index: -1;
+  animation: wave linear 3s infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 /* Choose & Upload Files */
