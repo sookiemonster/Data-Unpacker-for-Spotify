@@ -3,6 +3,7 @@
   --med-gray: #5c5c5c;
   --light-gray: #cacaca;
   --sp-green: #1db954;
+  --sp-green-dark: #076528;
 }
 
 body {
@@ -82,6 +83,8 @@ mark {
   border-radius: 10px;
   background-color: black;
   margin-right: 15px;
+  transition: background-color ease-out 0.15s;
+  cursor: pointer;
 }
 
 .icon {
@@ -92,6 +95,9 @@ mark {
   width: 45px;
 }
 
+.icon-container:hover {
+  background-color: var(--dark-gray);
+}
 
 /* Choose & Uploading */
 
@@ -115,7 +121,7 @@ mark {
 }
 
 label {
-  margin: 10px;
+  margin: 8px;
 }
 
 /* Choose File Button */
@@ -126,9 +132,18 @@ input[type="file"] {
 
 .choose-button {
   display: block;
+  padding: 10px 15px;
+  border-radius: 7px;
   font-weight: 400;
   font-size: 11pt;
   letter-spacing: 1px;
+  transition: background-color ease-out .15s, letter-spacing ease-out .2s;
+  cursor: pointer;
+}
+
+.choose-button:hover {
+  background-color: var(--dark-gray);
+  letter-spacing: 1.5px;
 }
 
 #file-selected {
@@ -145,9 +160,11 @@ input[type="submit"] {
 .upload-button {
   display: block;
   border-radius: 41px;
-  background: var(--sp-green);
+  background-color: var(--sp-green);
   padding: 17px 67px;
   text-align: center;
+  transition: background-color ease-out .15s;
+  cursor: pointer;
 }
 
 .upload-button > span {
@@ -155,6 +172,15 @@ input[type="submit"] {
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 600;
+  transition: cubic-bezier(.54,1.5,.71,1.07) .2s;
+}
+
+.upload-button:hover {
+  background-color: var(--sp-green-dark);
+}
+
+.upload-button:hover >span {
+  letter-spacing: 3px;
 }
 
 .faq {
@@ -163,4 +189,9 @@ input[type="submit"] {
   font-size: 16px;
   font-weight: 300;
   margin: 10px;
+  cursor: pointer;
+}
+
+.faq:hover {
+  color: var(--sp-green);
 }
