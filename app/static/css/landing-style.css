@@ -35,7 +35,7 @@ body {
   z-index: 1;
 }
 
-#margin-fix {
+#first-line {
   margin-left: -10px;
 }
 
@@ -69,6 +69,10 @@ mark {
   letter-spacing: .75px;
 }
 
+.disclaimer-container {
+  margin: 0 10px;
+}
+
 /* Logos & Links */
 
 #sp-logo {
@@ -84,7 +88,9 @@ mark {
 }
 
 .icon-container {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 60px;
   height: 60px;
   border-radius: 10px;
@@ -96,10 +102,8 @@ mark {
 
 .icon {
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 45px;
+  height: 45px;
 }
 
 .icon-container:hover {
@@ -233,20 +237,97 @@ input[type="submit"] {
 }
 
 @media only screen and (max-width: 1300px) {
+
   .layout-container {
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
   }
 
   .header-container {
-    margin-top: 60px;
+    text-align: center;
+    margin: 10px 0 0 0;
   }
 
   .icon-layout {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    margin: 0;
     justify-content: center;
   }
 
   #file-page {
     margin: 0;
+  }
+
+}
+
+
+@media only screen and (max-width: 700px) {
+  h1 {
+    font-size: calc(50px + 3vw);
+    line-height: calc(45px + 3vw);
+  }
+
+  small {
+    font-size: 30px;
+    transform: translateY(-.25em);
+  }
+
+  mark {
+    margin-left: calc(2px + .25vw);
+    letter-spacing: -2px;
+  }
+
+  .disclaimer {
+    font-size: 13px;
+    margin-top: 30px;
+    letter-spacing: .75px;
+  }
+
+  #first-line {
+    font-size: calc(70px + 3vw);
+    line-height: calc(70px + 3vw);
+  }
+
+  .choose-button {
+    letter-spacing: .5px;
+    font-size: 14px;
+  }
+
+  .upload-button {
+    padding: 12px 33px;
+  }
+
+  .upload-button > span {
+    letter-spacing: 1.5px;
+    font-size: 15px;
+  }
+
+  .upload-button:hover >span {
+    letter-spacing: 2px;
+  }
+
+  .faq {
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  .icon-layout {
+    bottom: calc(5px + 2vh);
+  }
+
+  .icon-container {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
   }
 
 }
