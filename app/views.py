@@ -12,7 +12,6 @@ hour_freq = defaultdict(lambda: 0)
 days_freq = defaultdict(lambda: 0)
 months_freq = defaultdict(lambda: 0)
 
-
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     if request.method == "GET":
@@ -57,5 +56,5 @@ def update(files):
             artist_freq[track["artistName"]] += 1
             track_freq[track["trackName"] + " by " + track["artistName"]] += 1
             hour_freq[time.hour] += 1
-            days_freq[time.day] += 1
+            days_freq[time.weekday()] += 1
             months_freq[time.month] += 1
