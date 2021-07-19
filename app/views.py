@@ -12,6 +12,9 @@ hour_freq = defaultdict(lambda: 0)
 days_freq = defaultdict(lambda: 0)
 months_freq = defaultdict(lambda: 0)
 
+# static vars
+trackfreqnum = 10
+            
 
 @app.route("/", methods=["GET", "POST"])
 def homepage():
@@ -44,7 +47,9 @@ def homepage():
             # update freq values
             update([file for file in files])
 
-            print(sorted(track_freq.items(), key=lambda x: x[1], reverse=True))
+            trackfreqoutput = sorted(track_freq.items(), key=lambda x: x[1], reverse=True)
+            return render_template('output.html', trackoutput = trackfreqoutput[:trackfreqnum])
+            #return trackfreqoutput
 
 # update artist_freq and track_freq
 def update(files):
