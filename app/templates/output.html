@@ -21,20 +21,23 @@
         <h3>Your Favorite Songs</h3>
         <ol>
           {%for name, freq in trackoutput%}
-          {% set namesplit = name.split('by') %}
-          {% if namesplit|length > 2 %}
-            
-          {%endif%}
+            {% set namesplit = name.split('by') %}
+              {%for i in namesplit%}
+                {% if namesplit|length > 2 %}
+                  namesplit[0] += namesplit[1]
+                  namesplit.pop(1)
+                {%endif%}
+              {%endfor%}
 
-          <li>
-            <div class="popular-item">
-              <div class="popular-icon"></div>
-              <div class="popular-description">
-                <span class="song-title">SONG</span>
-                <span class="song-artist">ARTIST</span>
+            <li>
+              <div class="popular-item">
+                <div class="popular-icon"></div>
+                <div class="popular-description">
+                  <span class="song-title">namesplit[0]</span>
+                  <span class="song-artist">namesplit[1]</span>
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
           {%endfor%}
 
         </ol>

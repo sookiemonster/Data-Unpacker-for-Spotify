@@ -51,12 +51,20 @@ def homepage():
             # update freq values
             update([file for file in files])
 
-            artistfreqoutput = sorted(artist_freq.items(), key=lambda x: x[1], reverse=True)
-            trackfreqoutput = sorted(track_freq.items(), key=lambda x: x[1], reverse=True)
-            hourfreqoutput = sorted(hour_freq.items(), key=lambda x: x[1], reverse=True)
-            daysfreqoutput = sorted(days_freq.items(), key=lambda x: x[1], reverse=True)
-            monthsfreqoutput = sorted(months_freq.items(), key=lambda x: x[1], reverse=True)
-            return render_template('output.html', artistoutput = artistfreqoutput[:artistfreq], trackoutput = trackfreqoutput[:trackfreq].items(), houroutput = hourfreqoutput[:hourfreq], daysoutput = daysfreqoutput[:daysfreq], monthsoutput = monthsfreqoutput[:monthsfreq])
+            artistfreqkeys = sorted(artist_freq.items(), key=lambda x: x[1], reverse=True)
+            trackfreqkeys = sorted(track_freq.keys(), key=lambda x: x[1], reverse=True)
+            hourfreqkeys = sorted(hour_freq.keys(), key=lambda x: x[1], reverse=True)
+            daysfreqkeys = sorted(days_freq.keys(), key=lambda x: x[1], reverse=True)
+            monthsfreqkeys = sorted(months_freq.keys(), key=lambda x: x[1], reverse=True)
+
+            artistfreqvalues = sorted(artist_freq.values(), key=lambda x: x[1], reverse=True)
+            trackfreqvalues = sorted(track_freq.values(), key=lambda x: x[1], reverse=True)
+            hourfreqvalues = sorted(hour_freq.values(), key=lambda x: x[1], reverse=True)
+            daysfreqvalues = sorted(days_freq.values(), key=lambda x: x[1], reverse=True)
+            monthsfreqvalues = sorted(months_freq.values(), key=lambda x: x[1], reverse=True)
+
+            print(trackfreqkeys[:trackfreq])
+            return render_template('output.html', artistkeys = artistfreqkeys[:artistfreq], trackkeys = trackfreqkeys[:trackfreq], hourkeys = hourfreqkeys[:hourfreq], dayskeys = daysfreqkeys[:daysfreq], monthskeys = monthsfreqkeys[:monthsfreq], artistvalues = artistfreqvalues[:artistfreq], trackvalues = trackfreqvalues[:trackfreq], hourvalues = hourfreqvalues[:hourfreq], daysvalues = daysfreqvalues[:daysfreq], monthsvalues = monthsfreqvalues[:monthsfreq])
             #return trackfreqoutput
 
 # update artist_freq and track_freq
