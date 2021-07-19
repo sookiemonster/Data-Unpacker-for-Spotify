@@ -19,8 +19,13 @@
       </div>
       <div class="card" id="popularity">
         <h3>Your Favorite Songs</h3>
-        {{ trackoutput }}
         <ol>
+          {%for name, freq in trackoutput%}
+          {% set namesplit = name.split('by') %}
+          {% if namesplit|length > 2 %}
+            
+          {%endif%}
+
           <li>
             <div class="popular-item">
               <div class="popular-icon"></div>
@@ -30,42 +35,8 @@
               </div>
             </div>
           </li>
-          <li>
-            <div class="popular-item">
-              <div class="popular-icon"></div>
-              <div class="popular-description">
-                <span class="song-title">SONG</span>
-                <span class="song-artist">ARTIST</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="popular-item">
-              <div class="popular-icon"></div>
-              <div class="popular-description">
-                <span class="song-title">SONG</span>
-                <span class="song-artist">ARTIST</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="popular-item">
-              <div class="popular-icon"></div>
-              <div class="popular-description">
-                <span class="song-title">SONG</span>
-                <span class="song-artist">ARTIST</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="popular-item">
-              <div class="popular-icon"></div>
-              <div class="popular-description">
-                <span class="song-title">SONG</span>
-                <span class="song-artist">ARTIST</span>
-              </div>
-            </div>
-          </li>
+          {%endfor%}
+
         </ol>
       </div>
     </div>
