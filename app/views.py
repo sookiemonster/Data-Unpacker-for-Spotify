@@ -1,16 +1,16 @@
-import json
 from app import app
 from ast import literal_eval
+from collections import defaultdict
 from datetime import datetime
-from flask import render_template, request, redirect, jsonify
+from flask import render_template, request
 import zipfile
 
 # frequency vars
-artist_freq = {}
-track_freq = {}
-hour_freq = {}
-days_freq = {}
-months_freq = {}
+artist_freq = defaultdict(lambda: 0)
+track_freq = defaultdict(lambda: 0)
+hour_freq = defaultdict(lambda: 0)
+days_freq = defaultdict(lambda: 0)
+months_freq = defaultdict(lambda: 0)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -53,31 +53,9 @@ def update(files):
             # convert end time to a datetime-readable format
             time = datetime.strptime(track["endTime"], "%Y-%m-%d %H:%M")
 
-            update_artist_freq(track)
-            update_track_freq(track)
-            update_time_freq(time)
-
-# try to increment item in artist_freq dictionary else add it
-def update_artist_freq(track):
-    try:
-        artist_freq[track["artistName"]] += 1
-    except KeyError:
-        artist_freq[track["artistName"]] = 1
-
-# try to increment item in track dictionary else add it
-def update_track_freq(track):
-    try:
-        track_freq[track["trackName"] + " by " + track["artistName"]] += 1
-    except KeyError:
-        track_freq[track["trackName"] + " by " + track["artistName"]] = 1
-
-# try to increment item in track dictionary else add it
-def update_time_freq(time):
-    try:
-        hour_freq[time.hour] += 1
-        days_freq[time.day] += 1
-        months_freq[time.month] += 1
-    except KeyError:
-        hour_freq[time.hour] = 1
-        days_freq[time.day] = 1
-        months_freq[time.month] = 11
+            # increment freq by 1 else add new item
+            artist_freq[track["artistName"]] += 1
+            track_freq[track["trackName"] + " by " + track["artistName"]] += 1
+            hour_freq[time.hour] += 1
+            days_freq[time.day] += 1
+            months_freq[time.month] += 1
