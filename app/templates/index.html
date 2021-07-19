@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/script.js"></script>
   </head>
     <title>Data Visualizer for Spotify</title>
   </head>
@@ -45,7 +47,7 @@
 
       <form id="data-form" action="/" method='POST' enctype="multipart/form-data">
         <label for="choose-file" class="choose-button">
-          Choose file: <span id="file-selected">No file chosen</span>
+          <span id="choose-text">Choose file:</span> <span id="file-selected">No file chosen</span>
         </label>
         <input id="choose-file" type="file" name='datapackage'/>
 
