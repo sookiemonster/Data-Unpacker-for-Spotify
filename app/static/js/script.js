@@ -1,7 +1,12 @@
 $(document).ready(function() {
   $("#choose-file").change(function() {
     var value = $("#choose-file").val();
-    if (value != "" && value != undefined) {
+    if (!value.endsWith(".zip")) {
+      alert("Please select a zip file.");
+      $("#choose-file").val('');
+      return false;
+    }
+    else if (value != "" && value != undefined) {
       $("#choose-text").html(
         "Selected File:"
       )
@@ -15,7 +20,7 @@ $(document).ready(function() {
   $("#upload-file").click(function() {
     var value = $("#choose-file").val();
     if (value == "" || value == undefined) {
-      alert("Please select a file to upload");
+      alert("Please select a file to upload.");
       return false;
     }
   })
