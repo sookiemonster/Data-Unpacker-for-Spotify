@@ -100,5 +100,7 @@ def update(files):
 # split the list of tuples into two lists of keys and values
 def splitfreq(inputvar,keyvar,valuevar,freq):
     for entry in inputvar[:freq]:
-        keyvar.append(entry[0])
-        valuevar.append(entry[1])
+        if len(keyvar) < freq: # some kind of restriction necessary so it doesn't add it again on refresh
+            keyvar.append(entry[0])
+        if len(valuevar) < freq:
+            valuevar.append(entry[1])
