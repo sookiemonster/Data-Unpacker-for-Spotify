@@ -83,8 +83,12 @@ mark {
 .icon-layout {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
+  width: auto;
   margin-top: 40px;
+}
+
+#centered-icons {
+  display: none;
 }
 
 .icon-container {
@@ -236,6 +240,8 @@ input[type="submit"] {
   color: var(--sp-green);
 }
 
+/* Portrait Screens */
+
 @media only screen and (max-width: 1300px) {
 
   .layout-container {
@@ -250,22 +256,26 @@ input[type="submit"] {
   }
 
   .icon-layout {
-    position: absolute;
-    left: 50%;
-    bottom: 40px;
-    transform: translateX(-50%);
+    position: static;
     margin: 0;
     justify-content: center;
   }
 
+  #under-header-icons {
+    display: none;
+  }
+
+  #centered-icons {
+    display: flex;
+  }
+
   #file-page {
-    margin: 0;
+    margin: 2vh 0 0 0;
   }
 
 }
 
-
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 700px) and (orientation: portrait) {
   h1 {
     font-size: calc(50px + 3vw);
     line-height: calc(45px + 3vw);
@@ -313,10 +323,6 @@ input[type="submit"] {
   .faq {
     font-size: 14px;
     margin: 10px;
-  }
-
-  .icon-layout {
-    bottom: calc(5px + 2vh);
   }
 
   .icon-container {
