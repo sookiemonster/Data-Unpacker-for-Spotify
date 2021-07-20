@@ -12,6 +12,18 @@ hour_freq = defaultdict(lambda: 0)
 days_freq = defaultdict(lambda: 0)
 months_freq = defaultdict(lambda: 0)
 
+# final output vars (should not be like this help)
+finalartistkeys = []
+finalartistvalues = []
+finaltrackkeys = []
+finaltrackvalues = []
+finalhourkeys = []
+finalhourvalues = []
+finaldayskeys = []
+finaldaysvalues = []
+finalmonthskeys = []
+finalmonthsvalues = []
+
 # static vars
 artistfreq = 10
 trackfreq = 10
@@ -23,7 +35,7 @@ monthsfreq = 10
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     if request.method == "GET":
-        return render_template("index.html") # render home template
+        return render_template("index.html") # render home template (upload page)
     else:
         if request.files:
             # get zipfile from user
@@ -51,20 +63,24 @@ def homepage():
             # update freq values
             update([file for file in files])
 
-            artistfreqkeys = sorted(artist_freq.items(), key=lambda x: x[1], reverse=True)
-            trackfreqkeys = sorted(track_freq.keys(), key=lambda x: x[1], reverse=True)
-            hourfreqkeys = sorted(hour_freq.keys(), key=lambda x: x[1], reverse=True)
-            daysfreqkeys = sorted(days_freq.keys(), key=lambda x: x[1], reverse=True)
-            monthsfreqkeys = sorted(months_freq.keys(), key=lambda x: x[1], reverse=True)
+            # sort the output into ordered lists of tuples
+            artistfreqoutput = sorted(artist_freq.items(), key=lambda x: x[1], reverse=True)
+            trackfreqoutput = sorted(track_freq.items(), key=lambda x: x[1], reverse=True)
+            hourfreqoutput = sorted(hour_freq.items(), key=lambda x: x[1], reverse=True)
+            daysfreqoutput = sorted(days_freq.items(), key=lambda x: x[1], reverse=True)
+            monthsfreqoutput = sorted(months_freq.items(), key=lambda x: x[1], reverse=True)
 
-            artistfreqvalues = sorted(artist_freq.values(), key=lambda x: x[1], reverse=True)
-            trackfreqvalues = sorted(track_freq.values(), key=lambda x: x[1], reverse=True)
-            hourfreqvalues = sorted(hour_freq.values(), key=lambda x: x[1], reverse=True)
-            daysfreqvalues = sorted(days_freq.values(), key=lambda x: x[1], reverse=True)
-            monthsfreqvalues = sorted(months_freq.values(), key=lambda x: x[1], reverse=True)
 
-            print(trackfreqkeys[:trackfreq])
-            return render_template('output.html', artistkeys = artistfreqkeys[:artistfreq], trackkeys = trackfreqkeys[:trackfreq], hourkeys = hourfreqkeys[:hourfreq], dayskeys = daysfreqkeys[:daysfreq], monthskeys = monthsfreqkeys[:monthsfreq], artistvalues = artistfreqvalues[:artistfreq], trackvalues = trackfreqvalues[:trackfreq], hourvalues = hourfreqvalues[:hourfreq], daysvalues = daysfreqvalues[:daysfreq], monthsvalues = monthsfreqvalues[:monthsfreq])
+            # split the lists of tuples into two lists of keys and values
+            splitfreq(artistfreqoutput,finalartistkeys,finalartistvalues,artistfreq)
+            splitfreq(trackfreqoutput,finaltrackkeys,finaltrackvalues,trackfreq)
+            splitfreq(hourfreqoutput,finalhourkeys,finalhourvalues,hourfreq)
+            splitfreq(daysfreqoutput,finaldayskeys,finaldaysvalues,daysfreq)
+            splitfreq(monthsfreqoutput,finalmonthskeys,finalmonthsvalues,monthsfreq)
+
+            # output to results page with data
+            return render_template('output.html', artistkeys = finalartistkeys, trackkeys = finaltrackkeys, hourkeys = finalhourkeys, dayskeys = finaldayskeys, monthskeys = finalmonthskeys, artistvalues = finalartistvalues, trackvalues = finaltrackvalues, hourvalues = finalhourvalues, daysvalues = finaldaysvalues, monthsvalues = finalmonthsvalues)
+
             #return trackfreqoutput
 
 # update artist_freq and track_freq
@@ -80,3 +96,9 @@ def update(files):
             hour_freq[time.hour] += 1
             days_freq[time.weekday()] += 1
             months_freq[time.month] += 1
+
+# split the list of tuples into two lists of keys and values
+def splitfreq(inputvar,keyvar,valuevar,freq):
+    for entry in inputvar[:freq]:
+        keyvar.append(entry[0])
+        valuevar.append(entry[1])

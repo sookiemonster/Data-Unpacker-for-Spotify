@@ -24,14 +24,14 @@
       <div class="card" id="popularity">
         <h3>Your Favorite Songs</h3>
         <ol>
-          {%for name, freq in trackoutput%}
+          {% for name in trackkeys %}
             {% set namesplit = name.split('by') %}
-              {%for i in namesplit%}
+              {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
                   namesplit[0] += namesplit[1]
                   namesplit.pop(1)
-                {%endif%}
-              {%endfor%}
+                {% endif %}
+              {% endfor %}
 
             <li>
               <div class="popular-item">
