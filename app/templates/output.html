@@ -61,7 +61,7 @@
           </div>
         </div>
         <ol>
-          {% for name, url in zip(trackkeys, images) %}
+          {% for name, artistname, track_url, artist_url in zip(trackkeys, artistkeys, track_images, artist_images) %}
             {% set namesplit = name.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
@@ -73,12 +73,13 @@
             <li>
               <div class="popular-item">
                 <div class="popular-icon">
-                  <!-- <img src="{{ url }}" height="64", width="64"> -->
+                  <img class="track-img" src="{{ track_url }}" height="64" width="64">
+                  <img class="artist-img" src="{{ artist_url }}" height="64" width="64">
                 </div>
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>
                   <span class="song-artist">{{ namesplit[1] }}</span>
-                  <span class="artist">NAME HERE</span>
+                  <span class="artist">{{ artistname }}</span>
                 </div>
               </div>
             </li>

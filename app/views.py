@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from flask import render_template, request, abort
 from json import loads
+from sys import exc_info
 from zipfile import ZipFile
 
 # allowed exts
@@ -17,8 +18,9 @@ freqs = {
     "months_freq": defaultdict(lambda: 0),
 }
 
-# images for most-listened-to tracks
+# images for most-listened-to tracks / artists
 top_track_img = []
+top_artist_img = []
 
 # user info
 username = ""
@@ -108,12 +110,27 @@ def homepage():
 
                     top_track_img.append(url)
 
+                top_artists = list(freqs["artist_freq"].keys())[:artistfreq]
+                for artist in top_artists:
+                    results = spotify.search(q=f"{artist}", type="artist")
+                    results = results["artists"]["items"]
+
+                    url = ""
+                    for result in results:
+                        if result["name"] == artist:
+                            url = result["images"][0]["url"]
+                            break
+
+                    top_artist_img.append(url)
+
+                print(top_artist_img)
+
                 # output to results page 
                 return render_template(
                     'output.html',
 
                     # pass lists containing keys of the frequency table
-                    artistkeys=list(freqs["artist_freq"].keys())[:artistfreq],
+                    artistkeys=top_artists,
                     trackkeys=top_tracks,
                     hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
                     dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
@@ -134,11 +151,15 @@ def homepage():
                     display_name=username,
                     icon_url=user_icon_url,
 
-                    # pass images for top tracks and the zip function
-                    images=top_track_img,
+                    # pass images for top tracks and artists
+                    track_images=top_track_img,
+                    artist_images=top_artist_img,
+
+                    # pass zip function
                     zip=zip,
                 )
         except:
+            print(f"{exc_info()[0]} occured")
             abort(500)
 
 # update artist_freq and track_freq

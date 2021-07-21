@@ -1,14 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-  $("#artist-select").click(function() {
-    $(".song-title, .song-artist").hide();
-    $(".artist").show();
+  $(".artist-img").hide();
+
+  $("#artist-select").click(function () {
+    $(".song-title, .song-artist, .track-img").hide();
+    $(".artist, .artist-img").show();
     $("#popular-header").html("Your Favorite Artists");
   });
 
-  $("#song-select").click(function() {
-    $(".artist").hide();
-    $(".song-title, .song-artist").show();
+  $("#song-select").click(function () {
+    $(".artist, .artist-img").hide();
+    $(".song-title, .song-artist, .track-img").show();
     $("#popular-header").html("Your Favorite Songs");
   });
 });
