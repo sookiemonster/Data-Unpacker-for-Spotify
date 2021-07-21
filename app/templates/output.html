@@ -15,7 +15,7 @@
   <body>
     <div id="layout-container">
       <div class="card" id="overview">
-        <h1>Hi {{ displayname }}</h1>
+        <h1>Hi {{ display_name }}</h1>
         <div id="user-icon">
           <img src="{{ icon_url }}">
         </div>
@@ -26,8 +26,8 @@
       <div class="card" id="popularity">
         <h3>Your Favorite Songs</h3>
         <ol>
-          {% for name in trackkeys %}
-            {% set namesplit = name.split('by') %}
+          {% for name, url in zip(trackkeys, images) %}
+            {% set namesplit = name.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
                   namesplit[0] += namesplit[1]
@@ -38,7 +38,7 @@
             <li>
               <div class="popular-item">
                 <div class="popular-icon">
-                  <img src="https://i.scdn.co/image/ab67616d0000b273730cc8eb459c92944233e891" height="64", width="64">
+                  <img src="{{ url }}" height="64", width="64">
                 </div>
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>

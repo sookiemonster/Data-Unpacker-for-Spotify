@@ -1,9 +1,9 @@
-from app import app, ZipUploadForm
+from app import app, spotify, ZipUploadForm
 from collections import defaultdict
-from json import loads
 from datetime import datetime
 from flask import render_template, request, abort
-import zipfile
+from json import loads
+from zipfile import ZipFile
 
 # allowed exts
 ALLOWED_EXTENSIONS = ["zip"]
@@ -16,6 +16,9 @@ freqs = {
     "days_freq": defaultdict(lambda: 0),
     "months_freq": defaultdict(lambda: 0),
 }
+
+# images for most-listened-to tracks
+top_track_img = []
 
 # user info
 username = ""
@@ -52,7 +55,7 @@ def homepage():
                     abort(400)
 
                 # create zip object
-                zipfile_obj = zipfile.ZipFile(file)
+                zipfile_obj = ZipFile(file)
 
                 # get a list of file names (json) inside zipfile
                 namelist = zipfile_obj.namelist()
@@ -95,6 +98,15 @@ def homepage():
                         info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
                         username = info["displayName"]
                         user_icon_url = info["largeImageUrl"]
+                
+                # get images for most listened tracks
+                top_tracks = list(freqs["track_freq"].keys())[:trackfreq]
+                for track in top_tracks:
+                    song = track.split(" by ")
+                    results = spotify.search(q=f"{song[0]} {song[1]}", type="track")
+                    url = results["tracks"]["items"][0]["album"]["images"][0]["url"]
+
+                    top_track_img.append(url)
 
                 # output to results page 
                 return render_template(
@@ -102,7 +114,7 @@ def homepage():
 
                     # pass lists containing keys of the frequency table
                     artistkeys=list(freqs["artist_freq"].keys())[:artistfreq],
-                    trackkeys=list(freqs["track_freq"].keys())[:trackfreq],
+                    trackkeys=top_tracks,
                     hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
                     dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
                     monthskeys=list(freqs["months_freq"].keys())[:monthsfreq],
@@ -119,8 +131,12 @@ def homepage():
                     artistnum="{:,d}".format(len(freqs["artist_freq"])),
 
                     # pass user info
-                    displayname=username,
+                    display_name=username,
                     icon_url=user_icon_url,
+
+                    # pass images for top tracks and the zip function
+                    images=top_track_img,
+                    zip=zip,
                 )
         except:
             abort(500)
