@@ -11,20 +11,55 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/output.js"></script>
   </head>
   <body>
     <div id="layout-container">
       <div class="card" id="overview">
         <h1>Hi {{ display_name }}</h1>
         <div id="user-icon">
-          <img src="{{ icon_url }}">
+          <!-- <img src="{{ icon_url }}"> -->
         </div>
         <small>In the past year...</small>
         <span class="overview-caption">You listened to <mark>{{ tracknum }}</mark> unique songs & <mark>{{ artistnum }}</mark> unique artists</span>
         <h2>Your listening tendencies</h2>
       </div>
       <div class="card" id="popularity">
-        <h3>Your Favorite Songs</h3>
+        <div class="header-container">
+          <svg id="heart" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 121.86 111.11" xml:space="preserve">
+          <path class="st0" d="M111.72,10.21C98.98-2.53,78.92-3.46,65.06,8.07c-0.02,0.01-1.8,1.48-4.12,1.48c-2.38,0-4.07-1.44-4.14-1.5
+          	C42.95-3.46,22.9-2.53,10.15,10.21C3.61,16.76,0,25.46,0,34.72c0,9.26,3.61,17.96,10.03,24.38l40.22,47.08
+          	c2.68,3.13,6.57,4.93,10.69,4.93c4.12,0,8.02-1.8,10.69-4.93l40.09-46.95C125.24,45.72,125.24,23.73,111.72,10.21z"/>
+          </svg>
+
+          <h3 id="popular-header">Your Favorite Songs</h3>
+          <div class="select-button" id="song-select">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 506.32 460.34" xml:space="preserve">
+            <g>
+            	<path d="M468.32,0h-262.9c-20.99,0-38,17.01-38,38v313.44c-11.91-31.56-43.81-54.21-81.21-54.21C38.67,297.23,0,333.82,0,378.79
+            		c0,44.97,38.67,81.56,86.21,81.56s102.21-36.59,102.21-81.56V53.92c0-15.97,12.95-28.92,28.92-28.92h239.07
+            		c15.97,0,28.92,12.95,28.92,28.92v297.53c-11.91-31.56-43.81-54.21-81.21-54.21c-47.54,0-86.21,36.59-86.21,81.56
+            		c0,44.97,38.67,81.56,86.21,81.56c47.54,0,102.21-36.59,102.21-81.56V38C506.32,17.01,489.31,0,468.32,0z M89.15,431.01
+            		c-35.49,0-64.26-24.09-64.26-53.81s28.77-53.81,64.26-53.81c35.49,0,64.26,24.09,64.26,53.81S124.63,431.01,89.15,431.01z
+            		 M405.63,431.01c-35.49,0-64.26-24.09-64.26-53.81s28.77-53.81,64.26-53.81c35.49,0,64.26,24.09,64.26,53.81
+            		S441.12,431.01,405.63,431.01z"/>
+            </g>
+            </svg>
+          </div>
+          <div class="select-button" id="artist-select">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 611.16 491.19" xml:space="preserve">
+            <path d="M442.93,293.23c-7.98-1.76-11.45-11.13-6.62-17.72c21.17-28.86,33.78-64.89,33.78-103.95C470.09,76.96,396.27,0,305.53,0
+            	S140.97,76.96,140.97,171.56c0,39.07,12.61,75.1,33.79,103.97c4.83,6.58,1.36,15.96-6.62,17.72
+            	C76.71,313.44,5.75,388.74,0.02,479.35c-0.4,6.4,4.61,11.84,11.03,11.84h0.5c5.91,0,10.68-4.66,11.03-10.55
+            	c5.37-90.42,79.29-163.11,175.17-168.93c7.56-0.46,13.99-5.68,16.11-12.95l0-0.01c1.86-6.38,0.07-13.28-4.69-17.91
+            	c-28.03-27.22-45.58-66.12-45.58-109.27c0-82.13,63.67-148.94,141.94-148.94c78.26,0,141.94,66.82,141.94,148.94
+            	c0,43.15-17.46,82.05-45.47,109.27c-4.76,4.63-6.55,11.53-4.69,17.91l0,0.01c2.12,7.27,8.55,12.5,16.11,12.95
+            	c95.88,5.82,169.8,78.51,175.17,168.93c0.35,5.9,5.12,10.55,11.03,10.55h0.5c6.41,0,11.43-5.44,11.03-11.84
+            	C605.41,388.71,534.41,313.39,442.93,293.23z"/>
+            </svg>
+          </div>
+        </div>
         <ol>
           {% for name, url in zip(trackkeys, images) %}
             {% set namesplit = name.split(' by ') %}
@@ -38,11 +73,12 @@
             <li>
               <div class="popular-item">
                 <div class="popular-icon">
-                  <img src="{{ url }}" height="64", width="64">
+                  <!-- <img src="{{ url }}" height="64", width="64"> -->
                 </div>
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>
                   <span class="song-artist">{{ namesplit[1] }}</span>
+                  <span class="artist">NAME HERE</span>
                 </div>
               </div>
             </li>

@@ -1,5 +1,6 @@
 :root {
   --dark-gray: #181818;
+  --interact-gray: #1d1d1d;
   --med-gray: #5c5c5c;
   --light-gray: #cacaca;
   --sp-green: #1db954;
@@ -27,7 +28,7 @@ h2 {
 h3 {
   font-size: 25pt;
   font-weight: 600;
-  margin: 0;
+  margin: 0 auto 0 0;
 }
 
 small {
@@ -142,6 +143,7 @@ ol li::before {
 .popular-description {
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
   box-sizing: border-box;
   height: 64px;
   margin-left: 10px;
@@ -162,4 +164,55 @@ ol li::before {
   font-size: 20px;
   font-weight: 300;
   color: var(--light-gray);
+}
+
+#heart {
+  width: 30px;
+  fill: var(--sp-green);
+  margin-right: 20px;
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.select-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 17px;
+  background-color: var(--interact-gray);
+  margin: 0 8px;
+  transition: background-color ease-out .2s;
+  cursor: pointer;
+}
+
+.select-button > svg {
+  width: 45px;
+  fill: var(--med-gray);
+  transition: fill ease-out .2s;
+}
+
+.select-button:hover {
+  background-color: var(--med-gray);
+}
+
+.select-button:hover > svg {
+  fill: var(--sp-green);
+}
+
+#song-select > svg {
+  transform: translateX(-2px);
+}
+
+.artist {
+  display: none;
+  font-size: 25px;
+  font-weight: 500;
+  color: white;
 }
