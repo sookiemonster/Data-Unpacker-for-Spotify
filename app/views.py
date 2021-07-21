@@ -42,76 +42,88 @@ def homepage():
         # render home template (upload page) and form
         return render_template("index.html", form=form)
     else:
-        if form.validate_on_submit:
-            # get zipfile from user
-            file = request.files["file"]
+        try:
+            if form.validate_on_submit:
+                # get zipfile from user
+                file = request.files["file"]
 
-            # secondary check to make sure file is a zip
-            if file.filename.split(".")[-1] not in ALLOWED_EXTENSIONS:
-                abort(400)
+                # secondary check to make sure file is a zip
+                if file.filename.split(".")[-1] not in ALLOWED_EXTENSIONS:
+                    abort(400)
 
-            zipfile_obj = zipfile.ZipFile(file)
+                # create zip object
+                zipfile_obj = zipfile.ZipFile(file)
 
-            # get a list of file names (json) inside zipfile
-            namelist = zipfile_obj.namelist()
-            file_names = [
-                file_name 
-                for file_name in namelist 
-                if file_name.endswith(".json")
-            ]
+                # get a list of file names (json) inside zipfile
+                namelist = zipfile_obj.namelist()
+                file_names = [
+                    file_name 
+                    for file_name in namelist 
+                    if file_name.endswith(".json")
+                ]
 
-            # make a list of tuples where the first element is the json encoded in a byte string
-            # and the second element is the filename
-            files = [
-                (zipfile_obj.open(name).read(), name)
-                for name in file_names
-                if name.split("/")[1].startswith("StreamingHistory")
-            ]
+                # make sure there are json files inside zip
+                if not file_names:
+                    abort(400)
 
-            # convert byte string to dictionary
-            files = [
-                loads(file[0].decode("UTF-8"))
-                for file in files
-            ]
+                # make a list of tuples where the first element is the json encoded in a byte string
+                # and the second element is the filename
+                files = [
+                    (zipfile_obj.open(name).read(), name)
+                    for name in file_names
+                    if name.split("/")[1].startswith("StreamingHistory")
+                ]
 
-            # update and sort frequency table
-            update([file for file in files])
-            sort()
+                # make sure there are StreamingHistory jsons
+                if not files:
+                    abort(400)
 
-            # get user icon
-            for name in file_names:
-                if name.split("/")[1].startswith("Identity"):
-                    # load Identity.json file
-                    info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
-                    username = info["displayName"]
-                    user_icon_url = info["largeImageUrl"]
+                # convert byte string to dictionary
+                files = [
+                    loads(file[0].decode("UTF-8"))
+                    for file in files
+                ]
 
-            # output to results page 
-            return render_template(
-                'output.html',
+                # update and sort frequency table
+                update([file for file in files])
+                sort()
 
-                # pass lists containing keys of the frequency table
-                artistkeys=list(freqs["artist_freq"].keys())[:artistfreq],
-                trackkeys=list(freqs["track_freq"].keys())[:trackfreq],
-                hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
-                dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
-                monthskeys=list(freqs["months_freq"].keys())[:monthsfreq],
+                # get user icon
+                for name in file_names:
+                    if name.split("/")[1].startswith("Identity"):
+                        # load Identity.json file
+                        info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
+                        username = info["displayName"]
+                        user_icon_url = info["largeImageUrl"]
 
-                # pass lists containing values of the frequency table
-                artistvalues=list(freqs["artist_freq"].values())[:artistfreq],
-                trackvalues=list(freqs["track_freq"].values())[:trackfreq],
-                hourvalues=list(freqs["hour_freq"].values())[:hourfreq],
-                daysvalues=list(freqs["days_freq"].values())[:daysfreq],
-                monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
+                # output to results page 
+                return render_template(
+                    'output.html',
 
-                # pass track and artist counters
-                tracknum="{:,d}".format(len(freqs["track_freq"])),
-                artistnum="{:,d}".format(len(freqs["artist_freq"])),
+                    # pass lists containing keys of the frequency table
+                    artistkeys=list(freqs["artist_freq"].keys())[:artistfreq],
+                    trackkeys=list(freqs["track_freq"].keys())[:trackfreq],
+                    hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
+                    dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
+                    monthskeys=list(freqs["months_freq"].keys())[:monthsfreq],
 
-                # pass user info
-                displayname=username,
-                icon_url=user_icon_url,
-            )
+                    # pass lists containing values of the frequency table
+                    artistvalues=list(freqs["artist_freq"].values())[:artistfreq],
+                    trackvalues=list(freqs["track_freq"].values())[:trackfreq],
+                    hourvalues=list(freqs["hour_freq"].values())[:hourfreq],
+                    daysvalues=list(freqs["days_freq"].values())[:daysfreq],
+                    monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
+
+                    # pass track and artist counters
+                    tracknum="{:,d}".format(len(freqs["track_freq"])),
+                    artistnum="{:,d}".format(len(freqs["artist_freq"])),
+
+                    # pass user info
+                    displayname=username,
+                    icon_url=user_icon_url,
+                )
+        except:
+            abort(500)
 
 # update artist_freq and track_freq
 def update(files):
