@@ -71,7 +71,9 @@ def homepage():
                 trackvalues=list(freqs["track_freq"].values())[:trackfreq],
                 hourvalues=list(freqs["hour_freq"].values())[:hourfreq],
                 daysvalues=list(freqs["days_freq"].values())[:daysfreq],
-                monthsvalues=list(freqs["months_freq"].values())[:monthsfreq]
+                monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
+                tracknum="{:,d}".format(len(freqs["track_freq"])),
+                artistnum="{:,d}".format(len(freqs["artist_freq"])),
             )
 
 # update artist_freq and track_freq
