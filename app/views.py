@@ -1,6 +1,6 @@
 from app import app
-from ast import literal_eval
 from collections import defaultdict
+from json import loads
 from datetime import datetime
 from flask import render_template, request
 import zipfile
@@ -14,6 +14,10 @@ freqs = {
     "months_freq": defaultdict(lambda: 0),
 }
 
+# user info
+username = ""
+user_icon_url = ""
+
 # static vars
 artistfreq = 10
 trackfreq = 10
@@ -24,6 +28,10 @@ monthsfreq = 10
 
 @app.route("/", methods=["GET", "POST"])
 def homepage():
+    # python scope rules demand i do this
+    global username
+    global user_icon_url
+
     if request.method == "GET":
         # render home template (upload page)
         return render_template("index.html")
@@ -51,7 +59,7 @@ def homepage():
 
             # convert byte string to dictionary
             files = [
-                literal_eval(file[0].decode("UTF-8"))
+                loads(file[0].decode("UTF-8"))
                 for file in files
             ]
 
@@ -59,21 +67,39 @@ def homepage():
             update([file for file in files])
             sort()
 
-            # output to results page passing a paired list of keys and values with a limit
+            # get user icon
+            for name in file_names:
+                if name.split("/")[1].startswith("Identity"):
+                    # load Identity.json file
+                    info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
+                    username = info["displayName"]
+                    user_icon_url = info["largeImageUrl"]
+
+            # output to results page 
             return render_template(
                 'output.html',
+
+                # pass lists containing keys of the frequency table
                 artistkeys=list(freqs["artist_freq"].keys())[:artistfreq],
                 trackkeys=list(freqs["track_freq"].keys())[:trackfreq],
                 hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
                 dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
                 monthskeys=list(freqs["months_freq"].keys())[:monthsfreq],
+
+                # pass lists containing values of the frequency table
                 artistvalues=list(freqs["artist_freq"].values())[:artistfreq],
                 trackvalues=list(freqs["track_freq"].values())[:trackfreq],
                 hourvalues=list(freqs["hour_freq"].values())[:hourfreq],
                 daysvalues=list(freqs["days_freq"].values())[:daysfreq],
                 monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
+
+                # pass track and artist counters
                 tracknum="{:,d}".format(len(freqs["track_freq"])),
                 artistnum="{:,d}".format(len(freqs["artist_freq"])),
+
+                # pass user info
+                displayname=username,
+                icon_url=user_icon_url,
             )
 
 # update artist_freq and track_freq
