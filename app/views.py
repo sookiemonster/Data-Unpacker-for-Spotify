@@ -1,9 +1,12 @@
-from app import app
+from app import app, ZipUploadForm
 from collections import defaultdict
 from json import loads
 from datetime import datetime
-from flask import render_template, request
+from flask import render_template, request, abort
 import zipfile
+
+# allowed exts
+ALLOWED_EXTENSIONS = ["zip"]
 
 # frequency table
 freqs = {
@@ -32,13 +35,21 @@ def homepage():
     global username
     global user_icon_url
 
+    # initialize form
+    form = ZipUploadForm()
+
     if request.method == "GET":
-        # render home template (upload page)
-        return render_template("index.html")
+        # render home template (upload page) and form
+        return render_template("index.html", form=form)
     else:
-        if request.files:
+        if form.validate_on_submit:
             # get zipfile from user
-            file = request.files["datapackage"]
+            file = request.files["file"]
+
+            # secondary check to make sure file is a zip
+            if file.filename.split(".")[-1] not in ALLOWED_EXTENSIONS:
+                abort(400)
+
             zipfile_obj = zipfile.ZipFile(file)
 
             # get a list of file names (json) inside zipfile

@@ -56,16 +56,19 @@
       </div>
       <div id="file-page">
 
-      <form id="data-form" action="/" method='POST' enctype="multipart/form-data">
+      <form id="data-form" action="{{ url_for('homepage') }}" method='POST' enctype="multipart/form-data">
+        {{ form.csrf_token }}
         <label for="choose-file" class="choose-button">
           <span id="choose-text">Choose file:</span> <span id="file-selected">No file chosen</span>
         </label>
-        <input id="choose-file" type="file" accept=".zip" name='datapackage'>
+        <!-- <input id="choose-file" type="file" accept=".zip" name='datapackage'> -->
+        {{ form.file(id="choose-file", accept=".zip") }}
 
         <label for="upload-file" class="upload-button">
           <span>Upload Data</span>
         </label>
-        <input id="upload-file" type="submit">
+        <!-- <input id="upload-file" type="submit"> -->
+        {{ form.submit(id="upload-file") }}
       </form>
 
       <a class="faq" href="https://support.spotify.com/us/article/data-rights-and-privacy-settings/">How do I get my data?</a>
