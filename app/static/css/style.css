@@ -1,6 +1,7 @@
 :root {
-  --dark-gray: #181818;
   --interact-gray: #1d1d1d;
+  --dark-gray: #181818;
+  --med-gray-2: #363636;
   --med-gray: #5c5c5c;
   --light-gray: #cacaca;
   --sp-green: #1db954;
@@ -118,6 +119,9 @@ ol li {
 }
 
 ol li::before {
+  display: inline-block;
+  width: 40px;
+  text-align: right;
   position: relative;
   top: -25px;
   content: "#" counter(popularity-counter);
@@ -134,10 +138,20 @@ ol li::before {
 }
 
 .popular-icon {
+  display: block;
   width: 64px;
   height: 64px;
+  overflow-y: hidden;
   border-radius: 0px;
   background-color: var(--artwork);
+}
+
+.popular-icon > img {
+  display: block;
+  position: relative;
+  width: 64px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .popular-description {
@@ -166,6 +180,17 @@ ol li::before {
   color: var(--light-gray);
 }
 
+.artist {
+  display: none;
+  font-size: 25px;
+  font-weight: 500;
+  color: white;
+}
+
+.artist-img {
+  display: none;
+}
+
 #heart {
   width: 30px;
   fill: var(--sp-green);
@@ -183,8 +208,8 @@ ol li::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 17px;
   background-color: var(--interact-gray);
   margin: 0 8px;
@@ -193,16 +218,24 @@ ol li::before {
 }
 
 .select-button > svg {
-  width: 45px;
+  width: 30px;
   fill: var(--med-gray);
   transition: fill ease-out .2s;
 }
 
 .select-button:hover {
-  background-color: var(--med-gray);
+  background-color: var(--med-gray-2);
 }
 
 .select-button:hover > svg {
+  fill: var(--sp-green);
+}
+
+.active-button {
+  background-color: var(--med-gray-2);
+}
+
+.active-button > svg {
   fill: var(--sp-green);
 }
 
@@ -210,9 +243,14 @@ ol li::before {
   transform: translateX(-2px);
 }
 
-.artist {
+.top-list li:nth-of-type(1n + 6) {
   display: none;
-  font-size: 25px;
-  font-weight: 500;
-  color: white;
+}
+
+.listen-freq {
+  display: block;
+  align-self: center;
+  font-size: 18pt;
+  font-weight: 300;
+  margin: 0 20px 0 auto;
 }

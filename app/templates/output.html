@@ -19,7 +19,7 @@
       <div class="card" id="overview">
         <h1>Hi {{ display_name }}</h1>
         <div id="user-icon">
-          <!-- <img src="{{ icon_url }}"> -->
+          <img src="{{ icon_url }}">
         </div>
         <small>In the past year...</small>
         <span class="overview-caption">You listened to <mark>{{ tracknum }}</mark> unique songs & <mark>{{ artistnum }}</mark> unique artists</span>
@@ -34,7 +34,7 @@
           </svg>
 
           <h3 id="popular-header">Your Favorite Songs</h3>
-          <div class="select-button" id="song-select">
+          <div class="select-button active-button" id="song-select">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 506.32 460.34" xml:space="preserve">
             <g>
             	<path d="M468.32,0h-262.9c-20.99,0-38,17.01-38,38v313.44c-11.91-31.56-43.81-54.21-81.21-54.21C38.67,297.23,0,333.82,0,378.79
@@ -60,11 +60,12 @@
             </svg>
           </div>
         </div>
-        <ol>
+        <ol class="top-list">
           {% for name, artistname, track_url, artist_url in zip(trackkeys, artistkeys, track_images, artist_images) %}
             {% set namesplit = name.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
+                  namesplit[0] += ' by '
                   namesplit[0] += namesplit[1]
                   namesplit.pop(1)
                 {% endif %}
@@ -73,14 +74,15 @@
             <li>
               <div class="popular-item">
                 <div class="popular-icon">
-                  <img class="track-img" src="{{ track_url }}" height="64" width="64">
-                  <img class="artist-img" src="{{ artist_url }}" height="64" width="64">
+                  <img class="track-img" src="{{ track_url }}">
+                  <img class="artist-img" src="{{ artist_url }}">
                 </div>
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>
                   <span class="song-artist">{{ namesplit[1] }}</span>
                   <span class="artist">{{ artistname }}</span>
                 </div>
+                <span class="listen-freq">N times</span>
               </div>
             </li>
           {%endfor%}
