@@ -72,8 +72,10 @@
 
             <li>
               <div class="popular-item">
-                <img class="popular-icon track-img" src="{{ track_url }}">
-                <img class="popular-icon artist-img" src="{{ artist_url }}">
+                <div class="popular-icon">
+                  <img class="track-img" src="{{ track_url }}">
+                  <img class="artist-img" src="{{ artist_url }}">
+                </div>
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>
                   <span class="song-artist">{{ namesplit[1] }}</span>

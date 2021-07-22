@@ -119,6 +119,9 @@ ol li {
 }
 
 ol li::before {
+  display: inline-block;
+  width: 40px;
+  text-align: right;
   position: relative;
   top: -25px;
   content: "#" counter(popularity-counter);
@@ -135,10 +138,20 @@ ol li::before {
 }
 
 .popular-icon {
+  display: block;
   width: 64px;
   height: 64px;
+  overflow-y: hidden;
   border-radius: 0px;
   background-color: var(--artwork);
+}
+
+.popular-icon > img {
+  display: block;
+  position: relative;
+  width: 64px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .popular-description {

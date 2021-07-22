@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  $(".artist, .artist-img").hide();
+
   $("#artist-select").click(function () {
     $(".song-title, .song-artist, .track-img").hide();
     $(".artist, .artist-img").show();
