@@ -65,6 +65,7 @@
             {% set namesplit = name.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
+                  namesplit[0] += ' by '
                   namesplit[0] += namesplit[1]
                   namesplit.pop(1)
                 {% endif %}
