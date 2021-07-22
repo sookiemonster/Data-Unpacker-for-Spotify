@@ -98,11 +98,15 @@ def homepage():
 
                 # get user icon
                 for name in file_names:
-                    if name.split("/")[1].startswith("Identity"):
+                    if name.split("/")[1].startswith("Userdata"):
                         # load Identity.json file
                         info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
-                        username = info["displayName"]
-                        user_icon_url = info["largeImageUrl"]
+                        user_id = info["username"]
+                        user = spotify.user(user_id)
+                        username = user["display_name"]
+                        user_icon_url = user["images"][0]["url"]
+                        print(user_icon_url)
+                        
                 
                 # get images for most listened to tracks
                 top_tracks = list(freqs["track_freq"].keys())[:trackfreq]
