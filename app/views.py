@@ -4,6 +4,7 @@ from datetime import datetime
 from flask import render_template, request, abort
 from json import loads
 from sys import exc_info
+from time import process_time
 from zipfile import ZipFile
 
 # allowed exts
@@ -36,6 +37,8 @@ monthsfreq = 10
 
 @app.route("/", methods=["GET", "POST"])
 def homepage():
+    start = process_time()
+
     # python scope rules demand i do this
     global username
     global user_icon_url
@@ -101,7 +104,7 @@ def homepage():
                         username = info["displayName"]
                         user_icon_url = info["largeImageUrl"]
                 
-                # get images for most listened tracks
+                # get images for most listened to tracks
                 top_tracks = list(freqs["track_freq"].keys())[:trackfreq]
                 for track in top_tracks:
                     song = track.split(" by ")
@@ -110,6 +113,7 @@ def homepage():
 
                     top_track_img.append(url)
 
+                # get images for most listened to artists
                 top_artists = list(freqs["artist_freq"].keys())[:artistfreq]
                 for artist in top_artists:
                     results = spotify.search(q=f"{artist}", type="artist")
@@ -122,8 +126,6 @@ def homepage():
                             break
 
                     top_artist_img.append(url)
-
-                print(top_artist_img)
 
                 # output to results page 
                 return render_template(
@@ -161,6 +163,8 @@ def homepage():
         except:
             print(f"{exc_info()[0]} occured")
             abort(500)
+        finally:
+            print(f"{(process_time() - start) * 1000} ms")
 
 # update artist_freq and track_freq
 def update(files):
@@ -169,10 +173,6 @@ def update(files):
             # convert end time to a datetime-readable format
             time = datetime.strptime(track["endTime"], "%Y-%m-%d %H:%M")
 
-            if track["artistName"] == "XXXTentacion":
-                print(track)
-
-            # increment freq by 1 else add new item
             freqs["artist_freq"][track["artistName"]] += 1
             freqs["track_freq"][track["trackName"] + " by " + track["artistName"]] += 1
             freqs["hour_freq"][time.hour] += 1
