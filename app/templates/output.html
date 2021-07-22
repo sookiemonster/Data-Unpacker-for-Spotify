@@ -61,7 +61,7 @@
           </div>
         </div>
         <ol class="top-list">
-          {% for name, url in zip(trackkeys, images) %}
+          {% for name, artistname, track_url, artist_url in zip(trackkeys, artistkeys, track_images, artist_images) %}
             {% set namesplit = name.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
@@ -72,18 +72,14 @@
 
             <li>
               <div class="popular-item">
-                <div class="popular-icon song-icon">
-                  <img src="{{ url }}" height="64", width="64">
-                </div>
-                <div class="popular-icon artist-icon">
-                  <img src="" height="64", width="64">
-                </div>
+                <img class="popular-icon track-img" src="{{ track_url }}">
+                <img class="popular-icon artist-img" src="{{ artist_url }}">
                 <div class="popular-description">
                   <span class="song-title">{{ namesplit[0] }}</span>
                   <span class="song-artist">{{ namesplit[1] }}</span>
-                  <span class="artist">NAME HERE</span>
+                  <span class="artist">{{ artistname }}</span>
                 </div>
-                <span class="listen-freq">X times</span>
+                <span class="listen-freq">N times</span>
               </div>
             </li>
           {%endfor%}
