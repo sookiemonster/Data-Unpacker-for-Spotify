@@ -34,6 +34,9 @@ hourfreq = 10
 daysfreq = 10
 monthsfreq = 10
 
+@app.template_filter()
+def commaFormat(n):
+    return f'{n:,}'
 
 @app.route("/", methods=["GET", "POST"])
 def homepage():
@@ -99,35 +102,49 @@ def homepage():
                 # get user icon
                 for name in file_names:
                     if name.split("/")[1].startswith("Userdata"):
-                        # load Identity.json file
-                        info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
-                        user_id = info["username"]
-                        user = spotify.user(user_id)
-                        username = user["display_name"]
-                        user_icon_url = user["images"][0]["url"]
-                        print(user_icon_url)
+                        try:
+                            # load Identity.json file
+                            info = loads(zipfile_obj.open(name).read().decode("UTF-8"))
+                            user_id = info["username"]
+                            user = spotify.user(user_id)
+                            username = user["display_name"]
+                            user_icon_url = user["images"][0]["url"]
+                        except Exception as e:
+                            print(e)
+                            print("Something went wrong with getting user icon and/or username")
+                            pass
                         
                 
                 # get images for most listened to tracks
                 top_tracks = list(freqs["track_freq"].keys())[:trackfreq]
                 for track in top_tracks:
-                    song = track.split(" by ")
-                    results = spotify.search(q=f"{song[0]} {song[1]}", type="track")
-                    url = results["tracks"]["items"][0]["album"]["images"][0]["url"]
+                    try:
+                        song = track.split(" by ")
+                        results = spotify.search(q=f"{song[0]} {song[1]}", type="track")
+                        url = results["tracks"]["items"][0]["album"]["images"][0]["url"]
 
-                    top_track_img.append(url)
+                        top_track_img.append(url)
+                    except Exception as e:
+                        print(e)
+                        print("Something went wrong with getting track images")
+                        pass
 
                 # get images for most listened to artists
                 top_artists = list(freqs["artist_freq"].keys())[:artistfreq]
                 for artist in top_artists:
-                    results = spotify.search(q=f"{artist}", type="artist")
-                    results = results["artists"]["items"]
+                    try:
+                        results = spotify.search(q=f"{artist}", type="artist")
+                        results = results["artists"]["items"]
 
-                    url = ""
-                    for result in results:
-                        if result["name"] == artist:
-                            url = result["images"][0]["url"]
-                            break
+                        url = ""
+                        for result in results:
+                            if result["name"] == artist:
+                                url = result["images"][0]["url"]
+                                break
+                    except Exception as e:
+                        print(e)
+                        print("Something went wrong with getting artist images")
+                        pass
 
                     top_artist_img.append(url)
 
@@ -150,8 +167,8 @@ def homepage():
                     monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
 
                     # pass track and artist counters
-                    tracknum="{:,d}".format(len(freqs["track_freq"])),
-                    artistnum="{:,d}".format(len(freqs["artist_freq"])),
+                    tracknum=len(freqs["track_freq"]),
+                    artistnum=len(freqs["artist_freq"]),
 
                     # pass user info
                     display_name=username,
@@ -164,7 +181,8 @@ def homepage():
                     # pass zip function
                     zip=zip,
                 )
-        except:
+        except Exception as e:
+            print(e)
             print(f"{exc_info()[0]} occured")
             abort(500)
         finally:

@@ -254,3 +254,7 @@ ol li::before {
   font-weight: 300;
   margin: 0 20px 0 auto;
 }
+
+.artist-count {
+  display: none;
+}

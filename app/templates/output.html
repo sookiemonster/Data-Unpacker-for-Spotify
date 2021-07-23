@@ -22,7 +22,7 @@
           <img src="{{ icon_url }}">
         </div>
         <small>In the past year...</small>
-        <span class="overview-caption">You listened to <mark>{{ tracknum }}</mark> unique songs & <mark>{{ artistnum }}</mark> unique artists</span>
+        <span class="overview-caption">You listened to <mark>{{ tracknum|commaFormat }}</mark> unique songs & <mark>{{ artistnum|commaFormat }}</mark> unique artists</span>
         <h2>Your listening tendencies</h2>
       </div>
       <div class="card" id="popularity">
@@ -61,8 +61,8 @@
           </div>
         </div>
         <ol class="top-list">
-          {% for name, artistname, track_url, artist_url in zip(trackkeys, artistkeys, track_images, artist_images) %}
-            {% set namesplit = name.split(' by ') %}
+          {% for trackname, artistname, track_url, artist_url, track_count, artist_count in zip(trackkeys, artistkeys, track_images, artist_images, trackvalues, artistvalues) %}
+            {% set namesplit = trackname.split(' by ') %}
               {% for i in namesplit %}
                 {% if namesplit|length > 2 %}
                   namesplit[0] += ' by '
@@ -82,7 +82,8 @@
                   <span class="song-artist">{{ namesplit[1] }}</span>
                   <span class="artist">{{ artistname }}</span>
                 </div>
-                <span class="listen-freq">N times</span>
+                <span class="listen-freq track-count">{{ track_count|commaFormat }} times</span>
+                <span class="listen-freq artist-count">{{ artist_count|commaFormat }} times</span>
               </div>
             </li>
           {%endfor%}
