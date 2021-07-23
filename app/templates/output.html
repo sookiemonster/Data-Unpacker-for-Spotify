@@ -36,7 +36,7 @@
         <span class="overview-caption">You listened to <mark>{{ tracknum|commaFormat }}</mark> unique songs & <mark>{{ artistnum|commaFormat }}</mark> unique artists</span>
         <h2>Your listening tendencies</h2>
         <div id = "chart-container">
-          <canvas id="myChart" width="400" height="200"></canvas>
+          <canvas id="myChart" width="420" height="200"></canvas>
           <script>
           var ctx = document.getElementById('myChart').getContext('2d');
           var myChart = new Chart(ctx, {
@@ -44,12 +44,12 @@
               data: {
                   labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
                   datasets: [{
-                      data: [1, 7, 3, 5, 2, 3, 2],
+                      data: [.1, .7, .3, .5, .2, .3, .2],
                       backgroundColor: [
-                          'rgba(14, 235, 92, 0.2)'
+                        'rgba(14, 235, 92, 0.2)'
                       ],
                       borderColor: [
-                          'rgba(14, 235, 92, 1)'
+                        'rgba(14, 235, 92, 1)'
                       ],
                       borderWidth: 1,
                       tension: 0.3
@@ -60,12 +60,30 @@
                   legend: {
                     display: false
                   },
+                  tooltip: {
+                    displayColors: false,
+                    callbacks: {
+                      label: function(context) {
+                        var label = context.dataset.label || '';
+
+                        if (context.parsed.y !== null) {
+                            label += new Intl.NumberFormat("en-US", {style: 'percent'}).format(context.parsed.y);
+                        }
+                        return label;
+                      }
+                    }
+                  }
                 },
                 scales: {
                   y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                      callback: function(value, index, values) {
+                        return value * 100 + '%';
+                      }
                     }
                   }
+                }
               }
           });
           </script>
