@@ -174,9 +174,8 @@ def homepage():
                     # pass images for top tracks and artists
                     session['track_images']=top_track_img
                     session['artist_images']=top_artist_img
-
-                    # pass zip function
-                    #zip=zip
+                    
+                    # send to visualizer
                     return redirect(url_for('visualizer'))
         except Exception as e:
             print(e)
@@ -189,6 +188,7 @@ def homepage():
 # separating the output, totally could be better
 @app.route("/visualizer")
 def visualizer():
+    # yeah this just fixes the repeat post request problem
     return render_template(
         "output.html",
 
