@@ -2,6 +2,10 @@ $(document).ready(function () {
 
   $(".artist, .artist-img, .artist-count").hide();
 
+  $("#icon-image").filter(function(index) {
+    return $(this).attr('src')==='';
+  }).hide();
+
   $("#artist-select").click(function () {
     $(".song-title, .song-artist, .track-img, .track-count").hide();
     $(".artist, .artist-img, .artist-count").show();
