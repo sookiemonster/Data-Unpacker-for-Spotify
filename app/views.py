@@ -1,11 +1,12 @@
 from app import app, spotify, ZipUploadForm
 from collections import defaultdict
 from datetime import datetime
-from flask import render_template, request, abort
+from flask import render_template, request, abort, Flask, redirect, url_for, session
 from json import loads
 from sys import exc_info
 from time import process_time
 from zipfile import ZipFile
+import os
 
 # allowed exts
 ALLOWED_EXTENSIONS = ["zip"]
@@ -148,45 +149,79 @@ def homepage():
 
                     top_artist_img.append(url)
 
-                # output to results page 
-                return render_template(
-                    'output.html',
+                # pass lists containing keys of the frequency table
+                session['artistkeys']=top_artists
+                session['trackkeys']=top_tracks
+                session['hourkeys']=list(freqs["hour_freq"].keys())[:hourfreq]
+                session['dayskeys']=list(freqs["days_freq"].keys())[:daysfreq]
+                session['monthskeys']=list(freqs["months_freq"].keys())[:monthsfreq]
 
-                    # pass lists containing keys of the frequency table
-                    artistkeys=top_artists,
-                    trackkeys=top_tracks,
-                    hourkeys=list(freqs["hour_freq"].keys())[:hourfreq],
-                    dayskeys=list(freqs["days_freq"].keys())[:daysfreq],
-                    monthskeys=list(freqs["months_freq"].keys())[:monthsfreq],
+                # pass lists containing values of the frequency table
+                session['artistvalues']=list(freqs["artist_freq"].values())[:artistfreq]
+                session['trackvalues']=list(freqs["track_freq"].values())[:trackfreq]
+                session['hourvalues']=list(freqs["hour_freq"].values())[:hourfreq]
+                session['daysvalues']=list(freqs["days_freq"].values())[:daysfreq]
+                session['monthsvalues']=list(freqs["months_freq"].values())[:monthsfreq]
 
-                    # pass lists containing values of the frequency table
-                    artistvalues=list(freqs["artist_freq"].values())[:artistfreq],
-                    trackvalues=list(freqs["track_freq"].values())[:trackfreq],
-                    hourvalues=list(freqs["hour_freq"].values())[:hourfreq],
-                    daysvalues=list(freqs["days_freq"].values())[:daysfreq],
-                    monthsvalues=list(freqs["months_freq"].values())[:monthsfreq],
+                # pass track and artist counters
+                session['tracknum']=len(freqs["track_freq"])
+                session['artistnum']=len(freqs["artist_freq"])
 
-                    # pass track and artist counters
-                    tracknum=len(freqs["track_freq"]),
-                    artistnum=len(freqs["artist_freq"]),
+                # pass user info
+                session['display_name']=username
+                session['icon_url']=user_icon_url
 
-                    # pass user info
-                    display_name=username,
-                    icon_url=user_icon_url,
-
-                    # pass images for top tracks and artists
-                    track_images=top_track_img,
-                    artist_images=top_artist_img,
-
-                    # pass zip function
-                    zip=zip,
-                )
+                # pass images for top tracks and artists
+                session['track_images']=top_track_img
+                session['artist_images']=top_artist_img
+                
+                # send to visualizer
+                return redirect(url_for('visualizer'))
         except Exception as e:
             print(e)
             print(f"{exc_info()[0]} occured")
             abort(500)
         finally:
             print(f"{(process_time() - start) * 1000} ms")
+
+
+# separating the output, totally could be better
+@app.route("/visualizer")
+def visualizer():
+    # yeah this just fixes the repeat post request problem
+    return render_template(
+        "output.html",
+
+        # pass lists containing keys of the frequency table
+        artistkeys=session['artistkeys'],
+        trackkeys=session['trackkeys'],
+        hourkeys=session['hourkeys'],
+        dayskeys=session['dayskeys'],
+        monthskeys=session['monthskeys'],
+
+        # pass lists containing values of the frequency table
+        artistvalues=session['artistvalues'],
+        trackvalues=session['trackvalues'],
+        hourvalues=session['hourvalues'],
+        daysvalues=session['daysvalues'],
+        monthsvalues=session['monthsvalues'],
+
+        # pass track and artist counters
+        tracknum=session['tracknum'],
+        artistnum=session['artistnum'],
+
+        # pass user info
+        display_name=session['display_name'],
+        icon_url=session['icon_url'],
+
+        # pass images for top tracks and artists
+        track_images=session['track_images'],
+        artist_images=session['artist_images'],
+
+        # pass zip function
+        zip=zip,
+    )
+
 
 # update artist_freq and track_freq
 def update(files):
