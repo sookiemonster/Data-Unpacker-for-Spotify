@@ -12,6 +12,7 @@ body {
   background-color: black;
   color: white;
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
 h1 {
@@ -53,14 +54,12 @@ mark {
 
 #layout-container {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   width: 90vw;
-  height: 90vh;
 }
 
 .card {
@@ -114,13 +113,14 @@ mark {
 #popularity {
   width: 1000px;
   height: 500px;
-  padding: 35px 32px;
+  padding: 35px 32px 50px;
 }
 
 ol {
   list-style: none;
   counter-reset: popularity-counter;
   padding: 0px 10px;
+  margin: 5px 0;
 }
 
 ol li {
@@ -203,7 +203,7 @@ ol li::before {
 #heart {
   width: 30px;
   fill: var(--sp-green);
-  margin-right: 20px;
+  margin: 0 20px;
 }
 
 .header-container {
