@@ -149,34 +149,34 @@ def homepage():
 
                     top_artist_img.append(url)
 
-                    # pass lists containing keys of the frequency table
-                    session['artistkeys']=top_artists
-                    session['trackkeys']=top_tracks
-                    session['hourkeys']=list(freqs["hour_freq"].keys())[:hourfreq]
-                    session['dayskeys']=list(freqs["days_freq"].keys())[:daysfreq]
-                    session['monthskeys']=list(freqs["months_freq"].keys())[:monthsfreq]
+                # pass lists containing keys of the frequency table
+                session['artistkeys']=top_artists
+                session['trackkeys']=top_tracks
+                session['hourkeys']=list(freqs["hour_freq"].keys())[:hourfreq]
+                session['dayskeys']=list(freqs["days_freq"].keys())[:daysfreq]
+                session['monthskeys']=list(freqs["months_freq"].keys())[:monthsfreq]
 
-                    # pass lists containing values of the frequency table
-                    session['artistvalues']=list(freqs["artist_freq"].values())[:artistfreq]
-                    session['trackvalues']=list(freqs["track_freq"].values())[:trackfreq]
-                    session['hourvalues']=list(freqs["hour_freq"].values())[:hourfreq]
-                    session['daysvalues']=list(freqs["days_freq"].values())[:daysfreq]
-                    session['monthsvalues']=list(freqs["months_freq"].values())[:monthsfreq]
+                # pass lists containing values of the frequency table
+                session['artistvalues']=list(freqs["artist_freq"].values())[:artistfreq]
+                session['trackvalues']=list(freqs["track_freq"].values())[:trackfreq]
+                session['hourvalues']=list(freqs["hour_freq"].values())[:hourfreq]
+                session['daysvalues']=list(freqs["days_freq"].values())[:daysfreq]
+                session['monthsvalues']=list(freqs["months_freq"].values())[:monthsfreq]
 
-                    # pass track and artist counters
-                    session['tracknum']=len(freqs["track_freq"])
-                    session['artistnum']=len(freqs["artist_freq"])
+                # pass track and artist counters
+                session['tracknum']=len(freqs["track_freq"])
+                session['artistnum']=len(freqs["artist_freq"])
 
-                    # pass user info
-                    session['display_name']=username
-                    session['icon_url']=user_icon_url
+                # pass user info
+                session['display_name']=username
+                session['icon_url']=user_icon_url
 
-                    # pass images for top tracks and artists
-                    session['track_images']=top_track_img
-                    session['artist_images']=top_artist_img
-                    
-                    # send to visualizer
-                    return redirect(url_for('visualizer'))
+                # pass images for top tracks and artists
+                session['track_images']=top_track_img
+                session['artist_images']=top_artist_img
+                
+                # send to visualizer
+                return redirect(url_for('visualizer'))
         except Exception as e:
             print(e)
             print(f"{exc_info()[0]} occured")
