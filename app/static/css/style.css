@@ -112,6 +112,7 @@ mark {
 
 #popularity {
   width: 1000px;
+  height: 100%;
   padding: 35px 32px;
 }
 
@@ -153,6 +154,7 @@ ol li::before {
   display: block;
   width: 64px;
   height: 64px;
+  min-width: 64px;
   overflow-y: hidden;
   border-radius: 0px;
   background-color: var(--artwork);
