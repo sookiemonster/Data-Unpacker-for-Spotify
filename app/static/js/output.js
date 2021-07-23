@@ -4,8 +4,12 @@ $(document).ready(function () {
 
   $(".artist, .artist-img, .artist-count").hide();
 
-  $("#icon-image").filter(function(index) {
+  $("#icon-image").filter(function() {
     return $(this).attr('src')==='';
+  }).hide();
+
+  $("#no-icon").filter(function() {
+    return $("#icon-image").attr('src')!='';
   }).hide();
 
   $("#artist-select").click(function() {

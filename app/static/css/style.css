@@ -74,7 +74,7 @@ mark {
   align-items: center;
   padding: 30px 52px;
   width: 600px;
-  height: 800px;
+  height: auto;
   box-sizing: border-box;
   background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
   background: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
@@ -298,4 +298,11 @@ ol li::before {
 
 .flip {
   transform: rotate(180deg);
+}
+
+#chart-container {
+  margin-top: 20px;
+  padding: 25px;
+  background-color: black;
+  border-radius: 15px;
 }
