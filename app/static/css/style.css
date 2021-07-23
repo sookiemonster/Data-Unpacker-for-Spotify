@@ -112,8 +112,7 @@ mark {
 
 #popularity {
   width: 1000px;
-  height: 500px;
-  padding: 35px 32px 50px;
+  padding: 35px 32px;
 }
 
 ol {
@@ -137,6 +136,10 @@ ol li::before {
   color: white;
   font-weight: 300;
   font-size: 23px;
+}
+
+.top-list li:nth-of-type(1n + 6) {
+  display: none;
 }
 
 .popular-item {
@@ -252,9 +255,6 @@ ol li::before {
   transform: translateX(-2px);
 }
 
-.top-list li:nth-of-type(1n + 6) {
-  display: none;
-}
 
 .listen-freq {
   display: block;
@@ -266,4 +266,34 @@ ol li::before {
 
 .artist-count {
   display: none;
+}
+
+#expand-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 40px;
+  border-radius: 20px;
+  margin: 20px 0 0 0;
+  background-color: var(--interact-gray);
+  filter: drop-shadow(0 0 7px rgba(0,0,0,0.2));
+  transition: background-color ease-out .1s;
+  cursor: pointer;
+}
+
+#expand-button:hover {
+  background-color: var(--med-gray-2);
+}
+
+#expand-arrow {
+  width: 20px;
+  fill: white;
+}
+
+.flip {
+  transform: rotate(180deg);
 }
