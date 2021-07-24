@@ -13,6 +13,8 @@ body {
   color: white;
   font-family: 'Open Sans', sans-serif;
   height: 100%;
+  width: 100vw;
+  margin: 0;
 }
 
 h1 {
@@ -139,10 +141,6 @@ ol li::before {
   font-size: 23px;
 }
 
-.top-list li:nth-of-type(1n + 6) {
-  display: none;
-}
-
 .popular-item {
   display: inline-flex;
   flex-flow: row nowrap;
@@ -174,6 +172,7 @@ ol li::before {
   justify-content: center;
   box-sizing: border-box;
   height: 64px;
+  width: 100%;
   margin-left: 10px;
   padding: 2px 4px;
 }
@@ -257,7 +256,6 @@ ol li::before {
   transform: translateX(-2px);
 }
 
-
 .listen-freq {
   display: block;
   align-self: center;
@@ -270,39 +268,150 @@ ol li::before {
   display: none;
 }
 
-#expand-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  height: 40px;
-  border-radius: 20px;
-  margin: 20px 0 0 0;
-  background-color: var(--interact-gray);
-  filter: drop-shadow(0 0 7px rgba(0,0,0,0.2));
-  transition: background-color ease-out .1s;
-  cursor: pointer;
-}
-
-#expand-button:hover {
-  background-color: var(--med-gray-2);
-}
-
-#expand-arrow {
-  width: 20px;
-  fill: white;
-}
-
-.flip {
-  transform: rotate(180deg);
-}
-
 #chart-container {
   margin-top: 20px;
-  padding: 25px;
+  padding: 15px;
+  width: 95%;
   background-color: black;
   border-radius: 15px;
+  box-sizing: border-box;
+}
+
+#myChart {
+  width: 420px;
+  height: 200px;
+}
+
+@media only screen and (max-width: 1000px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  #layout-container {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100vw;
+    height: auto;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  #overview {
+    padding: 30px 10px;
+    width: 100vw;
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
+    background: -moz-linear-gradient( 90deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
+    background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
+  }
+
+  #myChart {
+    width: 100%;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 27pt;
+  }
+
+  #overview > h1 {
+    text-align: center;
+    align-self: center;
+  }
+
+  h2 {
+    font-size: 13pt;
+  }
+
+  h3 {
+    font-size: 20pt;
+    margin-bottom: 10px;
+  }
+
+  #heart {
+    width: 30px;
+    margin-bottom: 10px;
+  }
+
+  .select-button {
+    background-color: var(--dark-gray);
+  }
+
+  .select-button:first-of-type {
+    margin-left: auto;
+  }
+
+  .select-button:last-of-type {
+    margin-right: auto;
+  }
+
+  small {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .overview-caption {
+    font-size: 17pt;
+    margin-bottom: 30px;
+  }
+
+  #popularity {
+    background-color: black;
+    padding: 0 20px;
+    margin: 20px 0;
+    box-sizing: border-box;
+  }
+
+  ol {
+    padding: 0px 15px;
+    margin: 2px 0;
+  }
+
+  ol li::before {
+    /* margin-left: 5px; */
+    width: 20px;
+    font-size: 18px;
+  }
+
+  .song-title {
+    font-size: 19px;
+  }
+
+  .song-artist {
+    font-size: 15px;
+    color: var(--light-gray);
+  }
+
+  .artist {
+    font-size: 19px;
+  }
+
+  .listen-freq {
+    font-size: 12pt;
+    padding-left: 5px;
+  }
+
+  .scroll-left {
+    height: 25px;
+  }
+
+}
+
+@media only screen and (max-width: 550px) {
+  .header-container {
+    justify-content: center;
+  }
+
+  h3 {
+    margin: 0 auto 10px auto;
+  }
+
+  #heart {
+    display: none;
+  }
 }

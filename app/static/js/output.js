@@ -27,13 +27,14 @@ $(document).ready(function () {
     $("#song-select").addClass("active-button");
     $("#artist-select").removeClass("active-button");
   });
-
-  $("#expand-button").click(function() {
-    $(".top-list li:nth-of-type(1n + 6)").toggle();
-    if ($("#expand-arrow").hasClass("flip")) {
-      $("#expand-arrow").removeClass("flip");
-    } else {
-      $("#expand-arrow").addClass("flip");
-    }
-  });
+  
+  //
+  // $("#expand-button").click(function() {
+  //   $(".top-list li:nth-of-type(1n + 6)").toggle();
+  //   if ($("#expand-arrow").hasClass("flip")) {
+  //     $("#expand-arrow").removeClass("flip");
+  //   } else {
+  //     $("#expand-arrow").addClass("flip");
+  //   }
+  // });
 });
