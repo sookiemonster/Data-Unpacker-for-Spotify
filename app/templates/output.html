@@ -36,16 +36,12 @@
         <span class="overview-caption">You listened to <mark>{{ tracknum|commaFormat }}</mark> unique songs & <mark>{{ artistnum|commaFormat }}</mark> unique artists</span>
         <h2>Your listening tendencies</h2>
         <div id = "chart-container">
-<<<<<<< HEAD
-          <canvas id="myChart"></canvas>
-=======
           {% set dayssum = daysvalues | sum %}
           {% set daysvaluepercent = [] %}
           {% for i in daysvalues %}
             {{ daysvaluepercent.append(i / dayssum) or '' }} <!-- the <or ''> is super important to not print "none" a bunch -->
           {%endfor%}
-          <canvas id="myChart" width="420" height="200"></canvas>
->>>>>>> 08ec8c0248193c25bda704328f1b7623a18ac4c5
+          <canvas id="myChart"></canvas>
           <script>
           var ctx = document.getElementById('myChart').getContext('2d');
           var myChart = new Chart(ctx, {
@@ -53,11 +49,8 @@
               data: {
                   labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
                   datasets: [{
-<<<<<<< HEAD
-                      data: [.1, .7, .3, .5, .2, .3, .2],
-=======
+
                       data: [{{ daysvaluepercent[0] }}, {{ daysvaluepercent[1] }}, {{ daysvaluepercent[2] }}, {{ daysvaluepercent[3]}}, {{ daysvaluepercent[4]}}, {{ daysvaluepercent[5] }}, {{ daysvaluepercent[6] }}],
->>>>>>> 08ec8c0248193c25bda704328f1b7623a18ac4c5
                       backgroundColor: [
                         'rgba(14, 235, 92, 0.2)'
                       ],
@@ -154,7 +147,9 @@
                   <img class="artist-img" src="{{ artist_url }}">
                 </div>
                 <div class="popular-description">
-                  <span class="song-title">{{ namesplit[0] }}</span>
+                  <div class="clip-container">
+                    <span class="song-title">{{ namesplit[0] }}</span>
+                  </div>
                   <span class="song-artist">{{ namesplit[1] }}</span>
                   <span class="artist">{{ artistname }}</span>
                 </div>

@@ -287,6 +287,13 @@ ol li::before {
     overflow-x: hidden;
   }
 
+  .clip-container {
+    width: 100%;
+    overflow-x: hidden;
+    height: 30px;
+    text-overflow: ellipsis;
+  }
+
   #layout-container {
     position: absolute;
     top: 0;
