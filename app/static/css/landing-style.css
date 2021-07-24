@@ -6,6 +6,23 @@
   --sp-green-dark: #076528;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--interact-gray);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--med-gray-2);
+}
+
+
 body {
   color: white;
   font-family: 'Open Sans', sans-serif;

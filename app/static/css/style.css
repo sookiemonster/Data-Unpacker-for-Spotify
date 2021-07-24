@@ -8,6 +8,22 @@
   --artwork: #000000;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--interact-gray);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--med-gray-2);
+}
+
 body {
   background-color: black;
   color: white;
@@ -127,11 +143,12 @@ ol {
 
 ol li {
   counter-increment: popularity-counter;
+  margin-left: 20px;
 }
 
 ol li::before {
   display: inline-block;
-  width: 40px;
+  width: 20px;
   text-align: right;
   position: relative;
   top: -25px;
@@ -144,7 +161,7 @@ ol li::before {
 .popular-item {
   display: inline-flex;
   flex-flow: row nowrap;
-  width: 80%;
+  width: 90%;
   margin: 15px 15px 0;
 }
 
@@ -172,7 +189,6 @@ ol li::before {
   justify-content: center;
   box-sizing: border-box;
   height: 64px;
-  width: 100%;
   margin-left: 10px;
   padding: 2px 4px;
 }
@@ -215,6 +231,12 @@ ol li::before {
   width: 100%;
   flex-flow: row wrap;
   align-items: center;
+}
+
+.button-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-left: 40px;
 }
 
 .select-button {
@@ -261,7 +283,8 @@ ol li::before {
   align-self: center;
   font-size: 18pt;
   font-weight: 300;
-  margin: 0 20px 0 auto;
+  margin: 0 5px 0 auto;
+  white-space: nowrap;
 }
 
 .artist-count {
@@ -306,6 +329,7 @@ ol li::before {
 
   .card {
     margin: 0;
+    border-radius: 0px;
   }
 
   #overview {
@@ -353,10 +377,6 @@ ol li::before {
     margin-left: auto;
   }
 
-  .select-button:last-of-type {
-    margin-right: auto;
-  }
-
   small {
     margin-left: auto;
     margin-right: auto;
@@ -374,14 +394,16 @@ ol li::before {
     box-sizing: border-box;
   }
 
+  .popular-description {
+    width: 100%;
+  }
+
   ol {
     padding: 0px 15px;
     margin: 2px 0;
   }
 
   ol li::before {
-    /* margin-left: 5px; */
-    width: 20px;
     font-size: 18px;
   }
 
@@ -409,6 +431,12 @@ ol li::before {
 
 }
 
+@media only screen and (max-width: 630px) {
+  .popular-item {
+    width: 80%;
+  }
+}
+
 @media only screen and (max-width: 550px) {
   .header-container {
     justify-content: center;
@@ -421,4 +449,9 @@ ol li::before {
   #heart {
     display: none;
   }
+
+  .button-container {
+    margin: 0;
+  }
+
 }
