@@ -36,6 +36,11 @@
         <span class="overview-caption">You listened to <mark>{{ tracknum|commaFormat }}</mark> unique songs & <mark>{{ artistnum|commaFormat }}</mark> unique artists</span>
         <h2>Your listening tendencies</h2>
         <div id = "chart-container">
+          {% set dayssum = daysvalues | sum %}
+          {% set daysvaluepercent = [] %}
+          {% for i in daysvalues %}
+            {{ daysvaluepercent.append(i / dayssum) or '' }} <!-- the <or ''> is super important to not print "none" a bunch -->
+          {%endfor%}
           <canvas id="myChart" width="420" height="200"></canvas>
           <script>
           var ctx = document.getElementById('myChart').getContext('2d');
@@ -44,7 +49,7 @@
               data: {
                   labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
                   datasets: [{
-                      data: [.1, .7, .3, .5, .2, .3, .2],
+                      data: [{{ daysvaluepercent[0] }}, {{ daysvaluepercent[1] }}, {{ daysvaluepercent[2] }}, {{ daysvaluepercent[3]}}, {{ daysvaluepercent[4]}}, {{ daysvaluepercent[5] }}, {{ daysvaluepercent[6] }}],
                       backgroundColor: [
                         'rgba(14, 235, 92, 0.2)'
                       ],
@@ -79,7 +84,7 @@
                     beginAtZero: true,
                     ticks: {
                       callback: function(value, index, values) {
-                        return value * 100 + '%';
+                        return (value * 100).toFixed(0) + '%';
                       }
                     }
                   }
@@ -157,7 +162,8 @@
           <svg id="expand-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 282.93 148.57" xml:space="preserve">
             <path d="M146.5,146.49L280.83,12.16C285.31,7.67,282.14,0,275.79,0H7.14C0.79,0-2.39,7.67,2.1,12.16l134.33,134.33
           	C139.21,149.27,143.72,149.27,146.5,146.49z"/>
-          </svg>
+          </svg>
+
         </div>
       </div>
     </div>
