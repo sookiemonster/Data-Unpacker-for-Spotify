@@ -404,6 +404,8 @@ ol li::before {
   }
 
   ol li::before {
+    box-sizing: border-box;
+    width: 30px;
     font-size: 18px;
   }
 
@@ -431,13 +433,21 @@ ol li::before {
 
 }
 
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 740px) {
   .popular-item {
     width: 80%;
+  }
+
+  .clip-container {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
 @media only screen and (max-width: 550px) {
+
   .header-container {
     justify-content: center;
   }
@@ -452,6 +462,33 @@ ol li::before {
 
   .button-container {
     margin: 0;
+  }
+  
+  .popular-item {
+    width: 300px;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+  ol li {
+    margin: 0;
+  }
+
+  .clip-container {
+    width: 80%;
+  }
+
+  .popular-item {
+    width: 200px;
+  }
+
+  .listen-freq {
+    display: none;
+  }
+
+  .artist-count {
+    display: none;
   }
 
 }
