@@ -31,6 +31,8 @@ body {
   height: 100%;
   width: 100vw;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -71,19 +73,15 @@ mark {
 }
 
 #layout-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 90vw;
+  width: 100vw;
 }
 
 .card {
-  border-radius: 15px;
-  background-color: var(--dark-gray);
-  margin: 15px;
+  background-color: black;
+  margin: 0 15px;
 }
 
 #overview {
@@ -148,14 +146,14 @@ ol li {
 
 ol li::before {
   display: inline-block;
-  width: 20px;
+  width: 40px;
   text-align: right;
   position: relative;
   top: -25px;
   content: "#" counter(popularity-counter);
   color: white;
   font-weight: 300;
-  font-size: 23px;
+  font-size: 20px;
 }
 
 .popular-item {
@@ -246,7 +244,7 @@ ol li::before {
   width: 60px;
   height: 60px;
   border-radius: 17px;
-  background-color: var(--interact-gray);
+  background-color: var(--dark-gray);
   margin: 0 8px;
   transition: background-color ease-out .2s;
   cursor: pointer;
@@ -305,9 +303,31 @@ ol li::before {
   height: 200px;
 }
 
+@media only screen and (max-width: 1730px) {
+  #layout-container {
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  #overview {
+    width: 100vw;
+    box-sizing: border-box;
+  }
+
+  #overview > h1 {
+    text-align: center;
+    align-self: center;
+  }
+
+  small {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
-  body {
-    overflow-x: hidden;
+  #layout-container {
+    flex-flow: row wrap;
   }
 
   .clip-container {
@@ -317,16 +337,6 @@ ol li::before {
     text-overflow: ellipsis;
   }
 
-  #layout-container {
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 100vw;
-    height: auto;
-  }
-
   .card {
     margin: 0;
     border-radius: 0px;
@@ -334,8 +344,6 @@ ol li::before {
 
   #overview {
     padding: 30px 10px;
-    width: 100vw;
-    box-sizing: border-box;
     background: linear-gradient(0deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
     background: -moz-linear-gradient( 90deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
     background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
@@ -348,11 +356,6 @@ ol li::before {
 
   h1 {
     font-size: 27pt;
-  }
-
-  #overview > h1 {
-    text-align: center;
-    align-self: center;
   }
 
   h2 {
@@ -369,17 +372,8 @@ ol li::before {
     margin-bottom: 10px;
   }
 
-  .select-button {
-    background-color: var(--dark-gray);
-  }
-
   .select-button:first-of-type {
     margin-left: auto;
-  }
-
-  small {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .overview-caption {
@@ -388,7 +382,6 @@ ol li::before {
   }
 
   #popularity {
-    background-color: black;
     padding: 0 20px;
     margin: 20px 0;
     box-sizing: border-box;
