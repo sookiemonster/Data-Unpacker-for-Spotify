@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-  // var top_expanded = false;
-
   $(".artist, .artist-img, .artist-count").hide();
 
   $("#icon-image").filter(function() {
@@ -47,6 +45,23 @@ $(document).ready(function () {
         $(".artist-count").show();
       }
     }
- });
+  });
+
+  $("ol li").click(function() {
+    if ($(this).children(".track-card").is(":hidden")) {
+      $(".track-card").hide();
+      $(this).children(".track-card").css("display", "flex").hide().fadeIn(200);
+    }
+  });
+
+  $(document).click(function(event) { 
+    var $target = $(event.target);
+    if(!$target.closest("li").length && 
+      $(".track-card").is(":visible")) {
+        $(".track-card").fadeOut(200);
+      }        
+  });
+
+
 
 });
