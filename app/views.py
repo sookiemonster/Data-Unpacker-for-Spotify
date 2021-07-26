@@ -176,7 +176,7 @@ def homepage():
                 session['artist_images']=top_artist_img
                 
                 # send to visualizer
-                return redirect(url_for('visualizer'))
+                return redirect(url_for('unpacked'))
         except Exception as e:
             print(e)
             print(f"{exc_info()[0]} occured")
@@ -186,8 +186,8 @@ def homepage():
 
 
 # separating the output, totally could be better
-@app.route("/visualizer")
-def visualizer():
+@app.route("/unpacked")
+def unpacked():
     # yeah this just fixes the repeat post request problem
     return render_template(
         "output.html",
