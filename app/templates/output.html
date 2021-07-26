@@ -73,7 +73,7 @@
                         var label = context.dataset.label || '';
 
                         if (context.parsed.y !== null) {
-                            label += new Intl.NumberFormat("en-US", {style: 'percent'}).format(context.parsed.y);
+                            label += new Intl.NumberFormat("en-US", {style: 'percent', minimumFractionDigits: 1}).format(context.parsed.y);
                         }
                         return label;
                       }
