@@ -1,4 +1,13 @@
 # Data Unpacker for Spotify
+Uses your data package for the past year from 
+
+```
+Spotify Account Settings -> Privacy Settings
+```
+[This link](https://www.spotify.com/account/privacy/) should work as well.
+
+---
+
 
 Bootstrap
 ```bash
