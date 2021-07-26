@@ -63,6 +63,11 @@ h1 {
   line-height: 115px;
 }
 
+#spotify {
+  display: inline-block;
+  margin-top: 5px;
+}
+
 small {
   display: inline-block;
   color: var(--light-gray);

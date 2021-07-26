@@ -135,34 +135,36 @@ mark {
 ol {
   list-style: none;
   counter-reset: popularity-counter;
-  padding: 0px 10px;
   margin: 5px 0;
 }
 
 ol li {
-  counter-increment: popularity-counter;
-  margin-left: 20px;
+  margin-left: 10px;
+  padding-left: 10px;
   background-color: black;
-  transition: background-color ease-out .1s;
   border-radius: 5px;
+  transition: background-color ease-out .1s;
   cursor: pointer;
-  padding-left: 5px;
 }
 
 ol li:first-of-type {
   margin-top: 15px;
 }
 
-ol li::before {
+.bullet {
+  display: inline;
+  font-size: 14px;
+}
+
+.list-count {
   display: inline-block;
-  width: 40px;
-  text-align: right;
   position: relative;
   top: -25px;
-  content: "#" counter(popularity-counter);
+  width: 20px;
+  text-align: right;
   color: white;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 ol li:hover {

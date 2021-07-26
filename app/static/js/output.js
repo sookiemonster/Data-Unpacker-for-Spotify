@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+  $("li").each(function(index) {
+    $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
+  });
+
   $(".artist, .artist-img, .artist-count").hide();
 
   $("#icon-image").filter(function() {
@@ -36,8 +40,8 @@ $(document).ready(function () {
 
   $(window).on("resize",function() {  
     if($(window).width() <= 500) {
-      $(".track-count").hide();
-      $(".artist-count").hide();
+      $(".popular item .track-count").hide();
+      $(".popular item .artist-count").hide();
     } else {
       if ($("#song-select").hasClass("active-button")) {
         $(".track-count").show();
@@ -51,6 +55,11 @@ $(document).ready(function () {
     if ($(this).children(".track-card").is(":hidden")) {
       $(".track-card").hide();
       $(this).children(".track-card").css("display", "flex").hide().fadeIn(200);
+      if ($("#song-select").hasClass("active-button")) {
+        $(this).children(".track-card").find(".track-count").show();
+      } else {
+        $(this).children(".track-card").find(".artist-count").show();
+      }
     }
   });
 
