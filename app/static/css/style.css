@@ -278,6 +278,20 @@ ol li:hover {
   border-right: 1px solid white;
 }
 
+.card-list-count {
+  position: absolute;
+  align-self: flex-end;
+  margin-right: 3%;
+  font-size: 19pt;
+  font-weight: 700;
+}
+
+.hash {
+  font-size: 16pt;
+  margin-right: 3px;
+  font-weight: 400;
+}
+
 .track-overview > .listen-freq {
   width: 50%;
   margin-left: 2px;

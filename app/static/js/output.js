@@ -4,6 +4,10 @@ $(document).ready(function () {
     $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
   });
 
+  $(".card-list-count").each(function(index) {
+    $(this).append(index + 1);
+  });
+
   $(".artist, .artist-img, .artist-count").hide();
 
   $("#icon-image").filter(function() {
