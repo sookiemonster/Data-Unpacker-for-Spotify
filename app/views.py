@@ -11,15 +11,14 @@ import os
 # allowed exts
 ALLOWED_EXTENSIONS = ["zip"]
 
-
 # frequency table
-# freqs = {
-#     "artist_freq": defaultdict(lambda: 0),
-#     "track_freq": defaultdict(lambda: 0),
-#     "hour_freq": defaultdict(lambda: 0),
-#     "days_freq": defaultdict(lambda: 0),
-#     "months_freq": defaultdict(lambda: 0),
-# }
+freqs = {
+    "artist_freq": defaultdict(lambda: 0),
+    "track_freq": defaultdict(lambda: 0),
+    "hour_freq": defaultdict(lambda: 0),
+    "days_freq": defaultdict(lambda: 0),
+    "months_freq": defaultdict(lambda: 0),
+}
 
 # images for most-listened-to tracks / artists
 top_track_img = []
@@ -79,8 +78,6 @@ def homepage():
                 if not file_names:
                     abort(400)
 
-                files = []
-                
                 # make a list of tuples where the first element is the json encoded in a byte string
                 # and the second element is the filename
                 files = [
@@ -98,15 +95,6 @@ def homepage():
                     loads(file[0].decode("UTF-8"))
                     for file in files
                 ]
-
-
-                session.clear() 
-
-                session["artist_freq"] = defaultdict(lambda: 0)
-                session["track_freq"] = defaultdict(lambda: 0)
-                session["hour_freq"] = defaultdict(lambda: 0)
-                session["days_freq"] = defaultdict(lambda: 0)
-                session["months_freq"] = defaultdict(lambda: 0)
 
                 # update and sort frequency table
                 update([file for file in files])
@@ -129,10 +117,10 @@ def homepage():
                         
                 
                 # get images for most listened to tracks
-                top_tracks = list(session["track_freq"].keys())[:trackfreq]
+                top_tracks = list(freqs["track_freq"].keys())[:trackfreq]
                 for track in top_tracks:
                     try:
-                        song = track.split(" by ") # reminder to shu: make sure to account for titles with "by" in the name 
+                        song = track.split(" by ")
                         results = spotify.search(q=f"{song[0]} {song[1]}", type="track")
                         url = results["tracks"]["items"][0]["album"]["images"][0]["url"]
 
@@ -143,7 +131,7 @@ def homepage():
                         pass
 
                 # get images for most listened to artists
-                top_artists = list(session["artist_freq"].keys())[:artistfreq]
+                top_artists = list(freqs["artist_freq"].keys())[:artistfreq]
                 for artist in top_artists:
                     try:
                         results = spotify.search(q=f"{artist}", type="artist")
@@ -160,25 +148,24 @@ def homepage():
                         pass
 
                     top_artist_img.append(url)
-                
-                
+
                 # pass lists containing keys of the frequency table
                 session['artistkeys']=top_artists
                 session['trackkeys']=top_tracks
-                session['hourkeys']=list(session["hour_freq"].keys())[:hourfreq]
-                session['dayskeys']=list(session["days_freq"].keys())[:daysfreq]
-                session['monthskeys']=list(session["months_freq"].keys())[:monthsfreq]
+                session['hourkeys']=list(freqs["hour_freq"].keys())[:hourfreq]
+                session['dayskeys']=list(freqs["days_freq"].keys())[:daysfreq]
+                session['monthskeys']=list(freqs["months_freq"].keys())[:monthsfreq]
 
                 # pass lists containing values of the frequency table
-                session['artistvalues']=list(session["artist_freq"].values())[:artistfreq]
-                session['trackvalues']=list(session["track_freq"].values())[:trackfreq]
-                session['hourvalues']=list(session["hour_freq"].values())[:hourfreq]
-                session['daysvalues']=list(session["days_freq"].values())[:daysfreq]
-                session['monthsvalues']=list(session["months_freq"].values())[:monthsfreq]
+                session['artistvalues']=list(freqs["artist_freq"].values())[:artistfreq]
+                session['trackvalues']=list(freqs["track_freq"].values())[:trackfreq]
+                session['hourvalues']=list(freqs["hour_freq"].values())[:hourfreq]
+                session['daysvalues']=list(freqs["days_freq"].values())[:daysfreq]
+                session['monthsvalues']=list(freqs["months_freq"].values())[:monthsfreq]
 
                 # pass track and artist counters
-                session['tracknum']=len(session["track_freq"])
-                session['artistnum']=len(session["artist_freq"])
+                session['tracknum']=len(freqs["track_freq"])
+                session['artistnum']=len(freqs["artist_freq"])
 
                 # pass user info
                 session['display_name']=username
@@ -201,39 +188,47 @@ def homepage():
 # separating the output, totally could be better
 @app.route("/unpacked")
 def unpacked():
-    # yeah this just fixes the repeat post request problem
-    return render_template(
-        "output.html",
+    try:
+        # yeah this just fixes the repeat post request problem
+        return render_template(
+            "output.html",
 
-        # pass lists containing keys of the frequency table
-        artistkeys=session['artistkeys'],
-        trackkeys=session['trackkeys'],
-        hourkeys=session['hourkeys'],
-        dayskeys=session['dayskeys'],
-        monthskeys=session['monthskeys'],
+            # pass lists containing keys of the frequency table
+            artistkeys=session['artistkeys'],
+            trackkeys=session['trackkeys'],
+            hourkeys=session['hourkeys'],
+            dayskeys=session['dayskeys'],
+            monthskeys=session['monthskeys'],
 
-        # pass lists containing values of the frequency table
-        artistvalues=session['artistvalues'],
-        trackvalues=session['trackvalues'],
-        hourvalues=session['hourvalues'],
-        daysvalues=session['daysvalues'],
-        monthsvalues=session['monthsvalues'],
+            # pass lists containing values of the frequency table
+            artistvalues=session['artistvalues'],
+            trackvalues=session['trackvalues'],
+            hourvalues=session['hourvalues'],
+            daysvalues=session['daysvalues'],
+            monthsvalues=session['monthsvalues'],
 
-        # pass track and artist counters
-        tracknum=session['tracknum'],
-        artistnum=session['artistnum'],
+            # pass track and artist counters
+            tracknum=session['tracknum'],
+            artistnum=session['artistnum'],
 
-        # pass user info
-        display_name=session['display_name'],
-        icon_url=session['icon_url'],
+            # pass user info
+            display_name=session['display_name'],
+            icon_url=session['icon_url'],
 
-        # pass images for top tracks and artists
-        track_images=session['track_images'],
-        artist_images=session['artist_images'],
+            # pass images for top tracks and artists
+            track_images=session['track_images'],
+            artist_images=session['artist_images'],
 
-        # pass zip function
-        zip=zip,
-    )
+            # pass zip function
+            zip=zip,
+        )
+    except Exception as e:
+        print(e)
+        print(f"{exc_info()[0]} occured")
+        abort(500)
+    finally:
+        session.clear()
+        clear()
 
 
 # update artist_freq and track_freq
@@ -243,14 +238,38 @@ def update(files):
             # convert end time to a datetime-readable format
             time = datetime.strptime(track["endTime"], "%Y-%m-%d %H:%M")
 
-            session["artist_freq"][track["artistName"]] += 1
-            session["track_freq"][track["trackName"] + " by " + track["artistName"]] += 1
-            session["hour_freq"][time.hour] += 1
-            session["days_freq"][time.weekday()] += 1
-            session["months_freq"][time.month] += 1
+            freqs["artist_freq"][track["artistName"]] += 1
+            freqs["track_freq"][track["trackName"] + " by " + track["artistName"]] += 1
+            freqs["hour_freq"][time.hour] += 1
+            freqs["days_freq"][time.weekday()] += 1
+            freqs["months_freq"][time.month] += 1
 
 # sort dicts in descending order
 def sort():
     for key, value in freqs.items():
         freqs[key] = dict(
             sorted(value.items(), key=lambda x: x[1], reverse=True))
+
+def clear():
+    global freqs
+    global top_track_img
+    global top_artist_img
+    global username
+    global user_icon_url
+
+    # frequency table
+    freqs = {
+        "artist_freq": defaultdict(lambda: 0),
+        "track_freq": defaultdict(lambda: 0),
+        "hour_freq": defaultdict(lambda: 0),
+        "days_freq": defaultdict(lambda: 0),
+        "months_freq": defaultdict(lambda: 0),
+    }
+
+   # images for most-listened-to tracks / artists
+    top_track_img = []
+    top_artist_img = []
+
+    # user info
+    username = ""
+    user_icon_url = "" 
