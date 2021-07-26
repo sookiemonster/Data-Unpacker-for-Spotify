@@ -283,13 +283,13 @@ ol li:hover {
   align-self: flex-end;
   margin-right: 3%;
   font-size: 19pt;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .hash {
   font-size: 16pt;
   margin-right: 3px;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .track-overview > .listen-freq {

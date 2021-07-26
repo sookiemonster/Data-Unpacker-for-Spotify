@@ -48,8 +48,8 @@
               type: 'line',
               data: {
                   labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
-                  datasets: [{
-
+                  datasets: [
+                    {
                       data: [{{ daysvaluepercent[0] }}, {{ daysvaluepercent[1] }}, {{ daysvaluepercent[2] }}, {{ daysvaluepercent[3]}}, {{ daysvaluepercent[4]}}, {{ daysvaluepercent[5] }}, {{ daysvaluepercent[6] }}],
                       backgroundColor: [
                         'rgba(14, 235, 92, 0.2)'
@@ -58,8 +58,12 @@
                         'rgba(14, 235, 92, 1)'
                       ],
                       borderWidth: 1,
-                      tension: 0.3
-                  }]
+                      tension: 0.3,
+                      fill: {
+                        target: 'origin',   
+                      }
+                  }
+                ]
               },
               options: {
                 plugins: {
@@ -83,6 +87,10 @@
                 scales: {
                   y: {
                     beginAtZero: true,
+                    grid: {
+                      drawBorder: false,
+                      color: 'rgb(20, 20, 20)',
+                    },
                     ticks: {
                       callback: function(value, index, values) {
                         return (value * 100).toFixed(0) + '%';
