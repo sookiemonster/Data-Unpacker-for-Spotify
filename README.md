@@ -1,15 +1,16 @@
 # Data Unpacker for Spotify
-Uses your data package for the past year from 
+
+
+Visualizes the Spotify 1-year data package from 
 
 ```
 Spotify Account Settings -> Privacy Settings
 ```
 [This link](https://www.spotify.com/account/privacy/) should work as well.
 
----
 
 
-Bootstrap
+## Setting up 
 ```bash
 # Get repo
 git clone https://github.com/sookiemonster/Data-Unpacker-for-Spotify.git
