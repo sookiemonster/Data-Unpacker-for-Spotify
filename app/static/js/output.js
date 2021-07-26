@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  // List Counters
+
   $("li").each(function(index) {
     $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
   });
@@ -7,6 +9,8 @@ $(document).ready(function () {
   $(".card-list-count").each(function(index) {
     $(this).append(index + 1);
   });
+
+  // Track & Artist Toggle
 
   $(".artist, .artist-img, .artist-count").hide();
 
@@ -42,6 +46,8 @@ $(document).ready(function () {
     $("#artist-select").removeClass("active-button");
   });
 
+  // Track Count Toggle
+  
   $(window).on("resize",function() {  
     if($(window).width() <= 500) {
       $(".popular item .track-count").hide();
@@ -55,17 +61,45 @@ $(document).ready(function () {
     }
   });
 
+  // Track Card Open
+
   $("ol li").click(function() {
-    if ($(this).children(".track-card").is(":hidden")) {
+    var card = $(this).children(".track-card");
+
+    if (card.is(":hidden")) {
       $(".track-card").hide();
-      $(this).children(".track-card").css("display", "flex").hide().fadeIn(200);
+      card.css("display", "flex").hide().fadeIn(200);
       if ($("#song-select").hasClass("active-button")) {
-        $(this).children(".track-card").find(".track-count").show();
+        card.find(".track-count").show();
+        var img = card.children(".track-img");
       } else {
-        $(this).children(".track-card").find(".artist-count").show();
+        card.find(".artist-count").show();
+        var img = card.children(".artist-img");
       }
+      // // Style Track Card Background
+      // // Color-Thief: https://github.com/lokesh/color-thief
+      
+      // var col;
+
+      // // if (img.complete) {
+      //   const colorThief = new ColorThief();
+      //   col = colorThief.getColor(img);
+      //   console.log("COLORING");
+      //   $("html").attr("style", "--card-bg: rgba(" + 
+      //     col[0] + ", " + col[1] + ", " + col[2] + ", 1");
+      // // } 
+      // // else {
+      // //   img.addEventListener('load', function() {
+      // //     col = colorThief.getColor(img);
+      // //     $("html").attr("style", "--card-bg: rgba(" + 
+      // //       col[0] + ", " + col[1] + ", " + col[2] + ", 1");
+      // //   });
+      // // }
+
     }
   });
+
+  // Track Card Close
 
   $(document).click(function(event) { 
     var $target = $(event.target);
@@ -74,7 +108,6 @@ $(document).ready(function () {
         $(".track-card").fadeOut(200);
       }        
   });
-
 
 
 });
