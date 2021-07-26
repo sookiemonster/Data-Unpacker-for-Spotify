@@ -74,11 +74,12 @@
                     displayColors: false,
                     callbacks: {
                       label: function(context) {
-                        var label = context.dataset.label || '';
+                        var label = [context.dataset.label || '', 'n Times'];
 
                         if (context.parsed.y !== null) {
-                            label += new Intl.NumberFormat("en-US", {style: 'percent', minimumFractionDigits: 1}).format(context.parsed.y);
+                            label[0] += new Intl.NumberFormat("en-US", {style: 'percent', minimumFractionDigits: 1}).format(context.parsed.y);
                         }
+
                         return label;
                       }
                     }
