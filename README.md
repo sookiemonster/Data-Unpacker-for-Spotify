@@ -1,10 +1,10 @@
-# Data Visualizer for Spotify
+# Data Unpacker for Spotify
 
 Bootstrap
 ```bash
 # Get repo
-git clone https://github.com/sookiemonster/Data-Visualizer-for-Spotify.git
-cd Data-Visualizer-for-Spotify
+git clone https://github.com/sookiemonster/Data-Unpacker-for-Spotify.git
+cd Data-Unpacker-for-Spotify
 ```
 
 <b>Highly suggested to run this in a virtual environment</b>
