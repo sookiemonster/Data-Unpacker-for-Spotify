@@ -15,11 +15,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--interact-gray);
+  background: var(--med-gray);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--med-gray-2);
+  background: var(--light-gray);
 }
 
 
@@ -27,6 +27,7 @@ body {
   color: white;
   font-family: 'Open Sans', sans-serif;
   width: 100vw;
+  overflow-x: hidden;
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -264,10 +265,10 @@ input[type="submit"] {
 
 /* Portrait Screens */
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1300px), only screen and (orientation: landscape) {
 
   .layout-container {
-    flex-direction: column;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
   }
