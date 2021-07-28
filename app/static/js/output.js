@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+  // Track Name Chart ID
+
+  $(".track-chart-container").each(function(index) {
+    $(this).children("canvas").attr("id", "track-chart-" + index);
+  });
+
   // List Counters
 
   $("li").each(function(index) {
@@ -108,6 +114,5 @@ $(document).ready(function () {
         $(".track-card").fadeOut(200);
       }        
   });
-
 
 });

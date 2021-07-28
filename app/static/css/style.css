@@ -310,6 +310,10 @@ ol li:hover {
   color: var(--light-gray);
 }
 
+.track-chart-container {
+  display: none;
+}
+
 .artist-count {
   display: none;
 }
