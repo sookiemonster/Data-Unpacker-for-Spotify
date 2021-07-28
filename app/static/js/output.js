@@ -85,7 +85,6 @@ $(document).ready(function () {
       if (img.complete) {
         const colorThief = new ColorThief();
         col = colorThief.getColor(img);
-        console.log(col);
         $("html").attr("style", "--card-bg: rgba(" + 
           col[0] + ", " + col[1] + ", " + col[2] + ", 1)");
       } 

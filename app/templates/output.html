@@ -167,8 +167,15 @@
                     <span class="song-artist">{{ namesplit[1] }}</span>
                     <span class="artist">{{ artistname }}</span>
                   </div>
-                  <span class="listen-freq track-count">{{ track_count|commaFormat }} times</span>
-                  <span class="listen-freq artist-count">{{ artist_count|commaFormat }} times</span>
+                  <span class="listen-freq track-count">{{ track_count|commaFormat }} times<br>
+                    <span class="listen-time">N hours X minutes</span>
+                  </span>
+                  <span class="listen-freq artist-count">{{ artist_count|commaFormat }} times<br>
+                    <span class="listen-time">M hours Y minutes</span>
+                  </span>
+                  <div class="track-chart-container">
+                    
+                  </div>
                 </div>
               </div>
               <div class="popular-item">

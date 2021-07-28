@@ -256,6 +256,7 @@ ol li:hover {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 4; 
+  overflow-y: scroll;
 }
 
 .track-card img {
@@ -293,6 +294,24 @@ ol li:hover {
   font-size: 16pt;
   margin-right: 3px;
   font-weight: 300;
+}
+
+.listen-freq {
+  display: inline-block;
+  align-self: center;
+  font-size: 15pt;
+  font-weight: 300;
+  margin: 0 5px 0 auto;
+  white-space: nowrap;
+}
+
+.listen-time { 
+  font-size: 15px;
+  color: var(--light-gray);
+}
+
+.artist-count {
+  display: none;
 }
 
 .track-overview > .listen-freq {
@@ -356,19 +375,6 @@ ol li:hover {
 
 #song-select > svg {
   transform: translateX(-2px);
-}
-
-.listen-freq {
-  display: block;
-  align-self: center;
-  font-size: 15pt;
-  font-weight: 300;
-  margin: 0 5px 0 auto;
-  white-space: nowrap;
-}
-
-.artist-count {
-  display: none;
 }
 
 #chart-container {
