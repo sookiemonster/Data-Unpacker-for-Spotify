@@ -49,27 +49,33 @@
           {%endfor%}
           <canvas id="myChart"></canvas>
           <script>
-          var ctx = document.getElementById('myChart').getContext('2d');
-          var myChart = new Chart(ctx, {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
               type: 'line',
               data: {
-                  labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
-                  datasets: [
-                    {
-                      data: [{{ daysvaluepercent[0] }}, {{ daysvaluepercent[1] }}, {{ daysvaluepercent[2] }}, {{ daysvaluepercent[3]}}, {{ daysvaluepercent[4]}}, {{ daysvaluepercent[5] }}, {{ daysvaluepercent[6] }}],
-                      backgroundColor: [
-                        'rgba(14, 235, 92, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgba(14, 235, 92, 1)'
-                      ],
-                      borderWidth: 1,
-                      tension: 0.3,
-                      fill: {
-                        target: 'origin',   
-                      }
+                labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
+                datasets: [{
+                  data: [
+                    {{ daysvaluepercent[0] }},
+                    {{ daysvaluepercent[1] }},
+                    {{ daysvaluepercent[2] }},
+                    {{ daysvaluepercent[3] }},
+                    {{ daysvaluepercent[4] }},
+                    {{ daysvaluepercent[5] }},
+                    {{ daysvaluepercent[6] }},
+                  ],
+                  backgroundColor: [
+                    'rgba(14, 235, 92, 0.2)'
+                  ],
+                  borderColor: [
+                    'rgba(14, 235, 92, 1)'
+                  ],
+                  borderWidth: 1,
+                  tension: 0.3,
+                  fill: {
+                    target: 'origin',
                   }
-                ]
+                }]
               },
               options: {
                 plugins: {
@@ -81,11 +87,14 @@
                     callbacks: {
                       label: function(context) {
                         var label = [context.dataset.label || '', 'n Times'];
-
+            
                         if (context.parsed.y !== null) {
-                            label[0] += new Intl.NumberFormat("en-US", {style: 'percent', minimumFractionDigits: 1}).format(context.parsed.y);
+                          label[0] += new Intl.NumberFormat("en-US", {
+                            style: 'percent',
+                            minimumFractionDigits: 1
+                          }).format(context.parsed.y);
                         }
-
+            
                         return label;
                       }
                     }
@@ -106,7 +115,7 @@
                   }
                 }
               }
-          });
+            });
           </script>
         </div>
       </div>

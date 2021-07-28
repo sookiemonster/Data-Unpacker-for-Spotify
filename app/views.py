@@ -126,6 +126,7 @@ def homepage():
 
                         top_track_img.append(url)
                     except Exception as e:
+                        top_track_img.append("")
                         print(e)
                         print("Something went wrong with getting track images")
                         pass
@@ -142,12 +143,13 @@ def homepage():
                             if result["name"] == artist:
                                 url = result["images"][0]["url"]
                                 break
+
+                        top_artist_img.append(url)
                     except Exception as e:
+                        top_artist_img.append("")
                         print(e)
                         print("Something went wrong with getting artist images")
                         pass
-
-                    top_artist_img.append(url)
 
                 # pass lists containing keys of the frequency table
                 session['artistkeys']=top_artists
@@ -188,47 +190,46 @@ def homepage():
 # separating the output, totally could be better
 @app.route("/unpacked")
 def unpacked():
-    try:
-        # yeah this just fixes the repeat post request problem
-        return render_template(
-            "output.html",
+    # yeah this just fixes the repeat post request problem
+    return render_template(
+        "output.html",
 
-            # pass lists containing keys of the frequency table
-            artistkeys=session['artistkeys'],
-            trackkeys=session['trackkeys'],
-            hourkeys=session['hourkeys'],
-            dayskeys=session['dayskeys'],
-            monthskeys=session['monthskeys'],
+        # pass lists containing keys of the frequency table
+        artistkeys=session['artistkeys'],
+        trackkeys=session['trackkeys'],
+        hourkeys=session['hourkeys'],
+        dayskeys=session['dayskeys'],
+        monthskeys=session['monthskeys'],
 
-            # pass lists containing values of the frequency table
-            artistvalues=session['artistvalues'],
-            trackvalues=session['trackvalues'],
-            hourvalues=session['hourvalues'],
-            daysvalues=session['daysvalues'],
-            monthsvalues=session['monthsvalues'],
+        # pass lists containing values of the frequency table
+        artistvalues=session['artistvalues'],
+        trackvalues=session['trackvalues'],
+        hourvalues=session['hourvalues'],
+        daysvalues=session['daysvalues'],
+        monthsvalues=session['monthsvalues'],
 
-            # pass track and artist counters
-            tracknum=session['tracknum'],
-            artistnum=session['artistnum'],
+        # pass track and artist counters
+        tracknum=session['tracknum'],
+        artistnum=session['artistnum'],
 
-            # pass user info
-            display_name=session['display_name'],
-            icon_url=session['icon_url'],
+        # pass user info
+        display_name=session['display_name'],
+        icon_url=session['icon_url'],
 
-            # pass images for top tracks and artists
-            track_images=session['track_images'],
-            artist_images=session['artist_images'],
+        # pass images for top tracks and artists
+        track_images=session['track_images'],
+        artist_images=session['artist_images'],
 
-            # pass zip function
-            zip=zip,
-        )
-    except Exception as e:
+        # pass zip function
+        zip=zip,
+    )
+    """ except Exception as e:
         print(e)
         print(f"{exc_info()[0]} occured")
         abort(500)
     finally:
         session.clear()
-        clear()
+        clear() """
 
 
 # update artist_freq and track_freq
