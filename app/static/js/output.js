@@ -6,6 +6,21 @@ $(document).ready(function () {
     $(this).children("canvas").attr("id", "track-chart-" + index);
   });
 
+  // Chart Time Selectors
+
+  $(".time-selector span").click(function() {
+    $(this).siblings("span").removeClass("active-time");
+    if ($(this).hasClass("over-week")) {
+      // UPDATE CHART FOR WEEKS
+    } else if ($(this).hasClass("over-day")) {
+      // UPDATE CHART FOR 24HR
+    } else if ($(this).hasClass("over-year")) {
+      // UPDATE CHART FOR MONTHS
+    }
+    $(this).addClass("active-time");
+    
+  });
+
   // List Counters
 
   $("li").each(function(index) {

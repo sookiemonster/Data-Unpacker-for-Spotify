@@ -391,6 +391,52 @@ ol li:hover {
   height: 200px;
 }
 
+.time-selector {
+  align-self: flex-end;
+  color: var(--med-gray);
+  margin: 10px 50px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.time-selector span {
+  cursor: pointer;
+  transition: color ease-out .15s;
+}
+
+.time-selector span:first-child {
+  padding-right: 5px;
+  border-right: 1px solid var(--med-gray-2);
+}
+
+.time-selector span:last-child {
+  padding-left: 5px;
+  border-left: 1px solid var(--med-gray-2);
+}
+
+.time-selector span:hover {
+  color: white;
+}
+
+.active-time {
+  color: var(--sp-green);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.active-time:hover {
+  color: var(--sp-green) !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
+}
+
 .track-chart-container {
   width: 90%;
   height: 80px;
