@@ -310,10 +310,6 @@ ol li:hover {
   color: var(--light-gray);
 }
 
-.track-chart-container {
-  display: none;
-}
-
 .artist-count {
   display: none;
 }
@@ -393,6 +389,16 @@ ol li:hover {
 #myChart {
   width: 420px;
   height: 200px;
+}
+
+.track-chart-container {
+  width: 90%;
+  height: 80px;
+  margin-top: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0);
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 1730px) {
