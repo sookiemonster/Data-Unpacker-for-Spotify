@@ -10,15 +10,7 @@ $(document).ready(function () {
 
   $(".time-selector span").click(function() {
     $(this).siblings("span").removeClass("active-time");
-    if ($(this).hasClass("over-week")) {
-      // UPDATE CHART FOR WEEKS
-    } else if ($(this).hasClass("over-day")) {
-      // UPDATE CHART FOR 24HR
-    } else if ($(this).hasClass("over-year")) {
-      // UPDATE CHART FOR MONTHS
-    }
     $(this).addClass("active-time");
-    
   });
 
   // List Counters
@@ -94,9 +86,15 @@ $(document).ready(function () {
       if ($("#song-select").hasClass("active-button")) {
         card.find(".track-count").show();
         img = card.children(".track-img")[0];
+
+        // Update Charts
+        card.find(".active-time")[0].onclick();
       } else {
         card.find(".artist-count").show();
         img = card.children(".artist-img")[0];
+
+        // Update Charts
+        card.find(".active-time")[0].onclick();
       }
       // Style Track Card Background
       // Color-Thief: https://github.com/lokesh/color-thief

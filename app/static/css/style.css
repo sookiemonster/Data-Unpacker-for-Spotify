@@ -386,7 +386,7 @@ ol li:hover {
   box-sizing: border-box;
 }
 
-#myChart {
+#overviewChart {
   width: 420px;
   height: 200px;
 }
@@ -418,6 +418,23 @@ ol li:hover {
   color: white;
 }
 
+.track-card .time-selector {
+  align-self: center;
+  margin: 5px;
+  padding: 2px 30px;
+  border-radius: 5px;
+  color: var(--light-gray);
+  background-color: rgba(0,0, 0, .2);
+}
+
+.track-card .time-selector span:first-child {
+  border-right: 1px solid var(--light-gray);
+}
+
+.track-card .time-selector span:last-child {
+  border-left: 1px solid var(--light-gray);
+}
+
 .active-time {
   color: var(--sp-green);
   font-size: 17px;
@@ -439,9 +456,7 @@ ol li:hover {
 
 .track-chart-container {
   width: 90%;
-  height: 80px;
-  margin-top: 15px;
-  padding: 15px;
+  padding: 0px 15px;
   box-sizing: border-box;
   background-color: rgba(0,0,0,0);
   border-radius: 5px;
@@ -488,7 +503,7 @@ ol li:hover {
     background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 30%, rgb(24,24,24) 80%);
   }
 
-  #myChart {
+  #overviewChart {
     width: 100%;
     height: auto;
   }

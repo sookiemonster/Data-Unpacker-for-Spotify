@@ -1,7 +1,7 @@
 $(document).ready(function() {
     for (let i = 0; i < 10; i++) {
         var ctx = document.getElementById('track-chart-' + i).getContext('2d');
-        var myChart = new Chart(ctx, {
+        var chart = new Chart(ctx, {
             type: 'line',
             data: {
             labels: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
@@ -80,5 +80,27 @@ $(document).ready(function() {
             }
             }
         });
+        $('#track-chart-' + i).data('track' + i, chart);
     }
 });
+
+function updateChart(canvasObject, dataArray) {
+    var chartNo = canvasObject.attr('id').match(/\d+/)[0];
+    var graph = canvasObject.data('track' + chartNo);
+    graph.data.datasets[0].data = dataArray;
+    graph.update();
+}
+
+function clickSpanUpdate(spanObject, trackDataArray, artistDataArray) {
+    if ($("#song-select").hasClass("active-button")) {
+        updateChart(
+            $(spanObject).parents(".track-card").find(".track-chart"), 
+            trackDataArray
+        );
+    } else {
+        updateChart(
+            $(spanObject).parents(".track-card").find(".track-chart"), 
+            artistDataArray
+        );
+    }
+}
