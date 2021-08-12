@@ -50,6 +50,7 @@ body {
 
 .header-container {
   margin: 0 calc(50px + 6vw);
+  animation: slide-from-left 1s ease forwards;
   z-index: 1;
 }
 
@@ -146,6 +147,7 @@ mark {
   height: 100vh;
   width: 53vw;
   overflow: hidden;
+  animation: fade-in 1s ease forwards;
 }
 
 #wave {
@@ -167,6 +169,70 @@ mark {
   }
 }
 
+/* Transitions */
+
+@keyframes slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(50%);
+  } 
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  } 
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  } 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  } 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
 /* Choose & Upload Files */
 
 #file-page {
@@ -177,6 +243,7 @@ mark {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  animation: slide-from-right 1s ease forwards;
   z-index: 1;
 }
 

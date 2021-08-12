@@ -13,7 +13,7 @@ $(document).ready(function() {
       $("#choose-text").html(
         "Selected File:"
       )
-
+      console.log(value.split("\\").splice(-1,1)[0]);
       $("#file-selected").html(
         value.split("\\").splice(-1,1)[0]
       );
@@ -25,6 +25,18 @@ $(document).ready(function() {
     if (value == "" || value == undefined) {
       alert("Please select a file to upload.");
       return false;
+    } else {
+      // Transition
+      $("#wave-container").css({
+        "transition" : "width 0.5s ease-in",
+        "width" : "110vw",
+        "z-index" : "-1" });
+
+      setTimeout(function() {
+        $("#wave-container").css("transition", "").hide();
+        $("body").css("background", "black");
+      }, 550);
+      $(".layout-container").fadeOut('slow');
     }
-  })
+  });
 });
