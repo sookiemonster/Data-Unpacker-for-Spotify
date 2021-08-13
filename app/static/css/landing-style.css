@@ -138,6 +138,40 @@ mark {
   background-color: var(--dark-gray);
 }
 
+/* Information Page */
+
+#info-page {
+  position: absolute;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  /* background: var(--dark-gray); */
+  z-index: 3;
+}
+
+#close-button {
+  position: absolute;
+  top: calc(34px + 2vh);
+  right: calc(30px + 2vw);
+  height: 25px;
+  fill: var(--med-gray);
+  transition: fill 0.2s ease-out;
+}
+
+#close-button:hover {
+  fill: white;
+}
+
+.info-text {
+  margin: calc(20px + 2vh) calc(25px + 3vw);
+}
+
+h2 {
+  display: block;
+  font-size: 50px;
+  font-size: 600;
+}
+
 /* Wave */
 
 #wave-container {
@@ -231,6 +265,36 @@ mark {
   to {
     opacity: 1;
   }
+}
+
+@keyframes slide-to-left {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  } 
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  } 
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.slide-left {
+  animation: slide-to-left 0.5s ease forwards !important;
+}
+
+.slide-right {
+  animation: slide-to-right 0.5s ease forwards !important;
 }
 
 /* Choose & Upload Files */

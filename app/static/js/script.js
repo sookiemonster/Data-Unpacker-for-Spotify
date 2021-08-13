@@ -1,4 +1,34 @@
 $(document).ready(function() {
+  $(".info").click(function() {
+    $("#wave-container").css({
+      "transition" : "width 0.6s ease",
+      "width" : "0vw",
+      "z-index" : "-1" });
+
+    $(".header-container").addClass("slide-left");
+    $("#file-page").addClass("slide-right");
+
+    setTimeout(function() {
+      $("#info-page").fadeIn(500);
+    }, 250);
+  });
+
+  $("#close-button").click(function() {
+    $("#info-page").fadeOut(200);
+
+    $(".header-container").removeClass("slide-left");
+    $("#file-page").removeClass("slide-right");
+
+    $("#wave-container").css({
+      "transition" : "width 0.6s ease",
+      "width" : "53vw",
+      "z-index" : "-1" });
+    
+    setTimeout(function() {
+      $("#wave-container").css("transition", "");
+    }, 600);
+  });
+
   $("#choose-file").change(function() {
     var value = $("#choose-file").val();
     if (!value.endsWith(".zip")) {

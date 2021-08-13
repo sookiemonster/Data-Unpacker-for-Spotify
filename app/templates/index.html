@@ -24,7 +24,20 @@
     <title>Data Unpacker for Spotify</title>
   </head>
   <body>
+    <div id="info-page">
+      <svg id="close-button" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 701.02 701.02" style="enable-background:new 0 0 701.02 701.02;"
+        xml:space="preserve">
+        <path d="M683.13,104.67L104.67,683.13c-23.86,23.86-62.91,23.86-86.77,0l0,0c-23.86-23.86-23.86-62.91,0-86.77
+          L596.35,17.9c23.86-23.86,62.91-23.86,86.77,0l0,0C706.99,41.76,706.99,80.81,683.13,104.67z"/>
+        <path d="M104.67,17.9l578.45,578.45c23.86,23.86,23.86,62.91,0,86.77l0,0c-23.86,23.86-62.91,23.86-86.77,0L17.9,104.67
+          c-23.86-23.86-23.86-62.91,0-86.77l0,0C41.76-5.97,80.81-5.97,104.67,17.9z"/>
+      </svg>
+      <div class="info-text">
+        <h2>ABOUT US</h2>
+      </div>
+    </div>
     <div class="layout-container">
+
       <div class="header-container">
         <h1><span id="first-line">Data</span><br>
         Unpacker<br></h1>
@@ -52,24 +65,36 @@
           <a class="icon-container" href="https://www.spotify.com/us/">
             <img class="icon" src="../static/images/Spotify_Icon_White.png">
           </a>
+          <div class="icon-container info">
+            <svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+            <style type="text/css">
+            .info{fill:#FFFFFF;}
+            </style>
+            <g>
+              <path class="info" d="M500,0C223.86,0,0,223.86,0,500s223.86,500,500,500s500-223.86,500-500S776.14,0,500,0z M548.35,772.98
+              c0,6.6-7.55,12-16.77,12h-63.17c-9.22,0-16.77-5.4-16.77-12V377.4c0-6.6,7.55-12,16.77-12h63.17c9.22,0,16.77,5.4,16.77,12V772.98z
+                M500,302.3c-26.71,0-48.35-21.65-48.35-48.35c0-26.71,21.65-48.35,48.35-48.35s48.35,21.65,48.35,48.35
+              C548.35,280.65,526.71,302.3,500,302.3z"/>
+            </g>
+            </svg>
+          </div>
         </div>
       </div>
       <div id="file-page">
+        <form id="data-form" action="{{ url_for('homepage') }}" method='POST' enctype="multipart/form-data">
+          {{ form.csrf_token }}
+          <label for="choose-file" class="choose-button">
+            <span id="choose-text">Choose file:</span> <span id="file-selected">No file chosen</span>
+          </label>
+          <!-- <input id="choose-file" type="file" accept=".zip" name='datapackage'> -->
+          {{ form.file(id="choose-file", accept=".zip") }}
 
-      <form id="data-form" action="{{ url_for('homepage') }}" method='POST' enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <label for="choose-file" class="choose-button">
-          <span id="choose-text">Choose file:</span> <span id="file-selected">No file chosen</span>
-        </label>
-        <!-- <input id="choose-file" type="file" accept=".zip" name='datapackage'> -->
-        {{ form.file(id="choose-file", accept=".zip") }}
-
-        <label for="upload-file" class="upload-button">
-          <span>Upload Data</span>
-        </label>
-        <!-- <input id="upload-file" type="submit"> -->
-        {{ form.submit(id="upload-file") }}
-      </form>
+          <label for="upload-file" class="upload-button">
+            <span>Upload Data</span>
+          </label>
+          <!-- <input id="upload-file" type="submit"> -->
+          {{ form.submit(id="upload-file") }}
+        </form>
 
       <a class="faq" href="https://support.spotify.com/us/article/data-rights-and-privacy-settings/">How do I get my data?</a>
       <div id="centered-icons" class="icon-layout">
@@ -90,6 +115,19 @@
         <a class="icon-container" href="https://www.spotify.com/us/">
           <img class="icon" src="../static/images/Spotify_Icon_White.png">
         </a>
+        <div class="icon-container info">
+          <svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+            <style type="text/css">
+            .info{fill:#FFFFFF;}
+            </style>
+            <g>
+              <path class="info" d="M500,0C223.86,0,0,223.86,0,500s223.86,500,500,500s500-223.86,500-500S776.14,0,500,0z M548.35,772.98
+              c0,6.6-7.55,12-16.77,12h-63.17c-9.22,0-16.77-5.4-16.77-12V377.4c0-6.6,7.55-12,16.77-12h63.17c9.22,0,16.77,5.4,16.77,12V772.98z
+                M500,302.3c-26.71,0-48.35-21.65-48.35-48.35c0-26.71,21.65-48.35,48.35-48.35s48.35,21.65,48.35,48.35
+              C548.35,280.65,526.71,302.3,500,302.3z"/>
+            </g>
+            </svg>
+        </div>
       </div>
     </div>
     </div>

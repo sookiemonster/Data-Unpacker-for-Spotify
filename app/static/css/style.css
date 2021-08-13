@@ -380,6 +380,19 @@ ol li:hover {
   width: 30px;
   fill: var(--sp-green);
   margin: 0 20px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(.9);
+  } 
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(.9);
+  }
 }
 
 .header-container {
