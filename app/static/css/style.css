@@ -7,6 +7,7 @@
   --sp-green: #1db954;
   --artwork: #000000;
   --card-bg: rgba(20,20,20,1);
+  --transition-time: 1s;
 }
 
 ::-webkit-scrollbar {
@@ -151,7 +152,7 @@ mark {
   background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
   background: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
   background: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(24,24,24) 70%);
-  animation: slide-from-top 1s ease forwards;
+  animation: slide-from-top var(--transition-time) ease;
 }
 
 #overview > h1 {
@@ -186,7 +187,7 @@ mark {
   width: 1000px;
   height: 100%;
   padding: 35px 32px;
-  animation: slide-from-bottom 1s ease forwards;
+  animation: slide-from-bottom var(--transition-time) ease;
 }
 
 ol {
@@ -307,13 +308,16 @@ ol li:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(150, 150, 150, 0.2);
   background: rgba(20, 20, 20, 0.7);
-  background: -moz-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 0) 100%);
-  background: -webkit-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 0) 100%);
-  background: linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 0) 100%);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: -moz-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
+  background: -webkit-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
+  background: linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
   z-index: 4; 
   overflow-y: scroll;
+}
+
+.track-card > div {
+  position: relative;
+  z-index: 5;
 }
 
 .track-card img {
