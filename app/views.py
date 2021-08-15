@@ -8,6 +8,8 @@ from time import process_time
 from zipfile import ZipFile
 import os
 
+
+
 # allowed exts
 ALLOWED_EXTENSIONS = ["zip"]
 
@@ -49,13 +51,15 @@ def homepage():
 
     # initialize form
     form = ZipUploadForm()
-
     if request.method == "GET":
         # render home template (upload page) and form
         return render_template("index.html", form=form)
     else:
         try:
             if form.validate_on_submit:
+
+                clear() # YOOOO THIS FIXED THE DUPE
+
                 # get zipfile from user
                 file = request.files["file"]
 
