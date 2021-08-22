@@ -77,46 +77,48 @@ $(document).ready(function () {
   // Track Card Open
 
   $("ol li").click(function() {
-    var card = $(this).children(".track-card");
-    var img;
-
-    if (card.is(":hidden")) {
-      $(".track-card").hide();
-      card.css("display", "flex").hide().fadeIn(200);
-      if ($("#song-select").hasClass("active-button")) {
-        card.find(".track-count").show();
-        img = card.children(".track-img")[0];
-
-        // Update Charts
-        card.find(".active-time")[0].onclick();
-      } else {
-        card.find(".artist-count").show();
-        img = card.children(".artist-img")[0];
-
-        // Update Charts
-        card.find(".active-time")[0].onclick();
+    if (!$("#popularity").is(':animated')) {
+        var card = $(this).children(".track-card");
+        var img;
+    
+        if (card.is(":hidden")) {
+          $(".track-card").hide();
+          card.css("display", "flex").hide().fadeIn(200);
+          if ($("#song-select").hasClass("active-button")) {
+            card.find(".track-count").show();
+            img = card.children(".track-img")[0];
+    
+            // Update Charts
+            card.find(".active-time")[0].onclick();
+          } else {
+            card.find(".artist-count").show();
+            img = card.children(".artist-img")[0];
+    
+            // Update Charts
+            card.find(".active-time")[0].onclick();
+          }
+          // Style Track Card Background
+          // Color-Thief: https://github.com/lokesh/color-thief
+          
+          var col;
+    
+          if (img.complete) {
+            const colorThief = new ColorThief();
+            col = colorThief.getColor(img);
+            $("html").attr("style", "--card-bg: rgba(" + 
+              col[0] + ", " + col[1] + ", " + col[2] + ", 1)");
+          } 
+          else {
+            img.addEventListener('load', function() {
+              col = colorThief.getColor(img);
+              $("html").attr("style", "--card-bg: rgba(" + 
+                col[0] + ", " + col[1] + ", " + col[2] + ", 1");
+            });
+          }
+    
+        }
       }
-      // Style Track Card Background
-      // Color-Thief: https://github.com/lokesh/color-thief
-      
-      var col;
-
-      if (img.complete) {
-        const colorThief = new ColorThief();
-        col = colorThief.getColor(img);
-        $("html").attr("style", "--card-bg: rgba(" + 
-          col[0] + ", " + col[1] + ", " + col[2] + ", 1)");
-      } 
-      else {
-        img.addEventListener('load', function() {
-          col = colorThief.getColor(img);
-          $("html").attr("style", "--card-bg: rgba(" + 
-            col[0] + ", " + col[1] + ", " + col[2] + ", 1");
-        });
-      }
-
-    }
-  });
+    });
 
   // Track Card Close
 

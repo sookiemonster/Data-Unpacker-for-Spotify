@@ -296,9 +296,10 @@ ol li:hover {
   flex-flow: column nowrap;
   align-items: center;
   position: fixed;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  -webkit-transform: translate3d(-50%, -50%, 0);
   width: 70vw;
   max-width: 500px;
   height: 90vh;
@@ -317,6 +318,8 @@ ol li:hover {
 
 .track-card > div {
   position: relative;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   z-index: 5;
 }
 

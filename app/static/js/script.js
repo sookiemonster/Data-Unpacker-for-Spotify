@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  
+  // Resest File Chooser on Load
+  $("#choose-file").val("");
+
+  // Open Info Page
   $(".info").click(function() {
     $("#wave-container").css({
       "transition" : "width 0.6s ease",
@@ -13,6 +18,7 @@ $(document).ready(function() {
     }, 250);
   });
 
+  // Close Info Page
   $("#close-button").click(function() {
     $("#info-page").fadeOut(200);
 
@@ -29,6 +35,7 @@ $(document).ready(function() {
     }, 600);
   });
 
+  // Change File Chooser Text on Upload
   $("#choose-file").change(function() {
     var value = $("#choose-file").val();
     if (!value.endsWith(".zip")) {
@@ -50,6 +57,8 @@ $(document).ready(function() {
     }
   });
 
+
+  // Upload File
   $("#upload-file").click(function() {
     var value = $("#choose-file").val();
     if (value == "" || value == undefined) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Data Unpacker</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -16,7 +16,6 @@
     
     <!-- https://github.com/lokesh/color-thief -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.min.js"></script>
-    <!-- <script src="node_modules/colorthief/dist/color-thief.umd.js"></script> -->
 
     <script src="../static/js/output.js"></script>
     <script src="../static/js/charts.js"></script>
@@ -189,8 +188,8 @@
             <li>
               <div class="track-card"> 
                 <div class="card-list-count"><span class="hash">#</span></div>
-                <img class="track-img" src="{{ track_url }}" crossorigin="anonymous">
-                <img class="artist-img" src="{{ artist_url }}" crossorigin="anonymous">
+                <img alt="{{ namesplit[0] }}" class="track-img" src="{{ track_url }}" crossorigin="anonymous">
+                <img alt="{{ artistname }}" class="artist-img" src="{{ artist_url }}" crossorigin="anonymous">
                 <div class="track-overview">
                   <div class="track-header">
                     <span class="song-title">{{ namesplit[0] }}<br></span>
@@ -217,8 +216,8 @@
               </div>
               <div class="popular-item">
                 <div class="popular-icon">
-                  <img class="track-img" src="{{ track_url }}">
-                  <img class="artist-img" src="{{ artist_url }}">
+                  <img alt="{{ namesplit[0] }}" class="track-img" src="{{ track_url }}">
+                  <img alt="{{ artistname }}" class="artist-img" src="{{ artist_url }}">
                 </div>
                 <div class="popular-description">
                   <div class="clip-container">
