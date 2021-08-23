@@ -10,6 +10,8 @@
   --transition-time: 1s;
 }
 
+/* Webkit Scrollbar Styling ----------------------------------------------*/
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -26,48 +28,7 @@
   background: var(--med-gray-2);
 }
 
-body {
-  background-color: black;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  height: 100%;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-h1 {
-  font-size: 32pt;
-  font-weight: 700;
-  margin: 0;
-}
-
-h2 {
-  font-size: 18pt;
-  font-weight: 400;
-  margin: 0;
-}
-
-h3 {
-  font-size: 25pt;
-  font-weight: 600;
-  margin: 0 auto 0 0;
-}
-
-small {
-  font-size: 18pt;
-  font-weight: 300;
-  color: var(--light-gray);
-}
-
-mark {
-  background-color: rgba(0,0,0,0);
-  color: var(--sp-green);
-  font-weight: 700;
-}
-
-/* Transitions */
+/* Transitions ----------------------------------------------*/
 
 @keyframes slide-from-right {
   from {
@@ -122,23 +83,70 @@ mark {
   }
 }
 
-.overview-caption {
-  text-align: center;
-  font-size: 22pt;
-  font-weight: 600;
-  margin-bottom: 40px;
+/* General Styling ---------------------------------------------- */
+
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #layout-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .card {
   background-color: black;
   margin: 0 15px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
+}
+
+/* Overview Card Styling ----------------------------------------------*/
+
+h1 {
+  font-size: 32pt;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 18pt;
+  font-weight: 400;
+  margin: 0;
+}
+
+small {
+  font-size: 18pt;
+  font-weight: 300;
+  color: var(--light-gray);
+}
+
+mark {
+  background-color: rgba(0,0,0,0);
+  color: var(--sp-green);
+  font-weight: 700;
+}
+
+.overview-caption {
+  text-align: center;
+  font-size: 22pt;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
 
 #overview {
@@ -166,6 +174,8 @@ mark {
   margin-bottom: 5px;
 }
 
+/* User Icon */
+
 #user-icon {
   background-color: black;
   width: 225px;
@@ -183,6 +193,8 @@ mark {
   fill: var(--light-gray);
 }
 
+/* Favorite Songs & Artists ---------------------------------------------- */
+
 #popularity {
   width: 1000px;
   height: 100%;
@@ -190,59 +202,132 @@ mark {
   animation: slide-from-bottom var(--transition-time) ease;
 }
 
-ol {
-  list-style: none;
-  counter-reset: popularity-counter;
-  margin: 5px 0;
+/* Header */
+
+.header-container {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  align-items: center;
 }
 
-ol li {
-  margin-left: 10px;
-  padding-left: 10px;
-  background-color: black;
-  border-radius: 5px;
+h3 {
+  font-size: 25pt;
+  font-weight: 600;
+  margin: 0 auto 0 0;
+}
+
+#heart {
+  width: 30px;
+  fill: var(--sp-green);
+  margin: 0 20px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(.9);
+  } 
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(.9);
+  }
+}
+
+/* Song & Artist Buttons */
+
+.button-container {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+}
+
+.select-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 17px;
+  background-color: var(--dark-gray);
+  transform: scale(.9);
+  transition: background-color ease-out .2s, transform cubic-bezier(.17,.67,.82,1.9) .09s;
+  cursor: pointer;
+}
+
+.select-button > svg {
+  width: 30px;
+  fill: var(--med-gray);
+  transition: fill ease-out .2s;
+}
+
+.select-button:hover > svg {
+  fill: var(--sp-green);
+}
+
+.active-button {
+  transform: scale(1);
+  background-color: var(--med-gray-2);
+}
+
+.active-button > svg {
+  fill: var(--sp-green);
+}
+
+#song-select > svg {
+  transform: translateX(-2px);
+}
+
+/* Song & Artist List */
+
+.top-list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  margin: 20px 0 5px;
+}
+
+.top-item {
+  padding: 6px 15px;
+  border-radius: 10px;
   transition: background-color ease-out .1s;
   cursor: pointer;
 }
 
-ol li:first-of-type {
-  margin-top: 15px;
-}
-
-.bullet {
-  display: inline;
-  font-size: 14px;
-}
-
-.list-count {
-  display: inline-block;
-  position: relative;
-  top: -25px;
-  width: 20px;
-  text-align: right;
-  color: white;
-  font-weight: 300;
-  font-size: 17px;
-}
-
-ol li:hover {
+.top-item:hover {
   background-color: var(--dark-gray);
 }
 
 .popular-item {
-  display: inline-flex;
+  display: flex;
   flex-flow: row nowrap;
-  width: 90%;
-  margin: 8px 15px 8px;
+  align-items: center;
+  gap: 7px;
+  flex-grow: 1;
 }
 
+/* List Numbers */
+
+.bullet {
+  font-size: 14px;
+}
+
+.list-count {
+  flex-shrink: 0;
+  text-align: center;
+  font-weight: 300;
+  font-size: 17px;
+}
+
+/* Track Icons */
+
 .popular-icon {
-  display: block;
   width: 64px;
   height: 64px;
   min-width: 64px;
   overflow-y: hidden;
-  border-radius: 0px;
   background-color: var(--artwork);
 }
 
@@ -254,24 +339,21 @@ ol li:hover {
   transform: translateY(-50%);
 }
 
+.artist-img {
+  display: none;
+}
+
+/* Track Descriptors */
+
 .popular-description {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  box-sizing: border-box;
-  height: 64px;
-  margin-left: 10px;
-  padding: 2px 4px;
-}
-
-.popular-description > span {
-  margin: 0;
 }
 
 .song-title {
   font-size: 25px;
   font-weight: 500;
-  color: white;
 }
 
 .song-artist {
@@ -284,12 +366,17 @@ ol li:hover {
   display: none;
   font-size: 25px;
   font-weight: 500;
-  color: white;
 }
 
-.artist-img {
-  display: none;
+.listen-freq {
+  font-size: 15pt;
+  font-weight: 300;
+  margin: 0 5px 0 auto;
+  white-space: nowrap;
 }
+
+
+/* Expanded Track Information */
 
 .track-card {
   display: none;
@@ -360,15 +447,6 @@ ol li:hover {
   font-weight: 300;
 }
 
-.listen-freq {
-  display: inline-block;
-  align-self: center;
-  font-size: 15pt;
-  font-weight: 300;
-  margin: 0 5px 0 auto;
-  white-space: nowrap;
-}
-
 .listen-time { 
   font-size: 15px;
   color: var(--light-gray);
@@ -381,75 +459,6 @@ ol li:hover {
 .track-overview > .listen-freq {
   width: 50%;
   margin-left: 7px;
-}
-
-#heart {
-  width: 30px;
-  fill: var(--sp-green);
-  margin: 0 20px;
-  animation: heartbeat 2s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(.9);
-  } 
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(.9);
-  }
-}
-
-.header-container {
-  display: flex;
-  width: 100%;
-  flex-flow: row wrap;
-  align-items: center;
-}
-
-.button-container {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 15px;
-  margin-right: 50px;
-}
-
-.select-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 17px;
-  background-color: var(--dark-gray);
-  transform: scale(.9);
-  transition: background-color ease-out .2s, transform cubic-bezier(.17,.67,.82,1.9) .09s;
-  cursor: pointer;
-}
-
-.select-button > svg {
-  width: 30px;
-  fill: var(--med-gray);
-  transition: fill ease-out .2s;
-}
-
-.select-button:hover > svg {
-  fill: var(--sp-green);
-}
-
-.active-button {
-  transform: scale(1);
-  background-color: var(--med-gray-2);
-}
-
-.active-button > svg {
-  fill: var(--sp-green);
-}
-
-#song-select > svg {
-  transform: translateX(-2px);
 }
 
 #chart-container {
@@ -520,15 +529,6 @@ ol li:hover {
   color: var(--sp-green) !important;
 }
 
-.noselect {
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
-  user-select: none; 
-}
-
 .track-chart-container {
   width: 90%;
   padding: 0px 15px;
@@ -544,7 +544,7 @@ ol li:hover {
   }
 
   #overview {
-    width: 100vw;
+    width: 100%;
     box-sizing: border-box;
   }
 
@@ -652,9 +652,6 @@ ol li:hover {
 }
 
 @media only screen and (max-width: 740px) {
-  .popular-item {
-    width: 80%;
-  }
 
   .clip-container {
     width: 200px;

@@ -15,9 +15,13 @@ $(document).ready(function () {
 
   // List Counters
 
-  $("li").each(function(index) {
+  var longest_counter = $(".popular-item").each(function(index) {
     $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
-  });
+  }).last().children(".list-count");
+  
+  // Equalize Counter Width
+
+  $(".popular-item .list-count").width(longest_counter.width());
 
   $(".card-list-count").each(function(index) {
     $(this).append(index + 1);
@@ -76,7 +80,7 @@ $(document).ready(function () {
 
   // Track Card Open
 
-  $("ol li").click(function() {
+  $(".top-item").click(function() {
     if (!$("#popularity").is(':animated')) {
         var card = $(this).children(".track-card");
         var img;
@@ -124,7 +128,7 @@ $(document).ready(function () {
 
   $(document).click(function(event) { 
     var $target = $(event.target);
-    if(!$target.closest("li").length && 
+    if(!$target.closest(".top-item").length && 
       $(".track-card").is(":visible")) {
         $(".track-card").fadeOut(200);
       }        
