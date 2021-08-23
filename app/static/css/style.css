@@ -412,7 +412,8 @@ ol li:hover {
 .button-container {
   display: flex;
   flex-flow: row nowrap;
-  margin-left: 40px;
+  gap: 15px;
+  margin-right: 50px;
 }
 
 .select-button {
@@ -423,8 +424,8 @@ ol li:hover {
   height: 60px;
   border-radius: 17px;
   background-color: var(--dark-gray);
-  margin: 0 8px;
-  transition: background-color ease-out .2s;
+  transform: scale(.9);
+  transition: background-color ease-out .2s, transform cubic-bezier(.17,.67,.82,1.9) .09s;
   cursor: pointer;
 }
 
@@ -434,15 +435,12 @@ ol li:hover {
   transition: fill ease-out .2s;
 }
 
-.select-button:hover {
-  background-color: var(--med-gray-2);
-}
-
 .select-button:hover > svg {
   fill: var(--sp-green);
 }
 
 .active-button {
+  transform: scale(1);
   background-color: var(--med-gray-2);
 }
 
