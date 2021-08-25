@@ -29,55 +29,56 @@ $(document).ready(function() {
             }]
             },
             options: {
-            plugins: {
-                legend: {
-                display: false
-                },
-                tooltip: {
-                displayColors: false,
-                callbacks: {
-                    label: function(context) {
-                    var label = [context.dataset.label || '', 'n Times'];
-    
-                    if (context.parsed.y !== null) {
-                        label[0] += new Intl.NumberFormat("en-US", {
-                        style: 'percent',
-                        minimumFractionDigits: 1
-                        }).format(context.parsed.y);
-                    }
-    
-                    return label;
-                    }
-                }
-                }
-            },
-            scales: {
-                y: {
-                beginAtZero: true,
-                grid: {
-                    drawBorder: false,
-                },
-                ticks: {
-                    color: "white",
-                    font: {
-                        size: 12,
-                        family: "'Open Sans', sans-serif",
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                    display: false
                     },
-                    callback: function(value, index, values) {
-                    return (value * 100).toFixed(0) + '%';
+                    tooltip: {
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                        var label = [context.dataset.label || '', 'n Times'];
+        
+                        if (context.parsed.y !== null) {
+                            label[0] += new Intl.NumberFormat("en-US", {
+                            style: 'percent',
+                            minimumFractionDigits: 1
+                            }).format(context.parsed.y);
+                        }
+        
+                        return label;
+                        }
                     }
-                }
+                    }
                 },
-                x: {
+                scales: {
+                    y: {
+                    beginAtZero: true,
+                    grid: {
+                        drawBorder: false,
+                    },
                     ticks: {
                         color: "white",
                         font: {
                             size: 12,
                             family: "'Open Sans', sans-serif",
+                        },
+                        callback: function(value, index, values) {
+                        return (value * 100).toFixed(0) + '%';
+                        }
+                    }
+                    },
+                    x: {
+                        ticks: {
+                            color: "white",
+                            font: {
+                                size: 12,
+                                family: "'Open Sans', sans-serif",
+                            }
                         }
                     }
                 }
-            }
             }
         });
         $('#track-chart-' + i).data('track' + i, chart);
@@ -94,12 +95,12 @@ function updateChart(canvasObject, dataArray) {
 function clickSpanUpdate(spanObject, trackDataArray, artistDataArray) {
     if ($("#song-select").hasClass("active-button")) {
         updateChart(
-            $(spanObject).parents(".track-card").find(".track-chart"), 
+            $(spanObject).parents(".popular-expanded").find(".track-chart"), 
             trackDataArray
         );
     } else {
         updateChart(
-            $(spanObject).parents(".track-card").find(".track-chart"), 
+            $(spanObject).parents(".popular-expanded").find(".track-chart"), 
             artistDataArray
         );
     }

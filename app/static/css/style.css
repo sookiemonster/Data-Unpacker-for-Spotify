@@ -4,6 +4,7 @@
   --med-gray-2: #363636;
   --med-gray: #5c5c5c;
   --light-gray: #cacaca;
+  --light-gray-2: #a8a8a8;
   --sp-green: #1db954;
   --artwork: #000000;
   --card-bg: rgba(20,20,20,1);
@@ -193,6 +194,62 @@ mark {
   fill: var(--light-gray);
 }
 
+/* Chart Styling */
+
+#overviewChart {
+  width: 420px;
+  height: 200px;
+}
+
+#chart-container {
+  margin-top: 20px;
+  padding: 15px;
+  width: 95%;
+  background-color: black;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.active-time {
+  color: var(--sp-green);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.active-time:hover {
+  color: var(--sp-green) !important;
+}
+
+.time-selector {
+  color: var(--med-gray);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.time-selector span {
+  cursor: pointer;
+  transition: color ease-out .15s;
+}
+
+.time-selector-overview {
+  align-self: flex-end;
+  margin: 10px 50px 0 0;
+}
+
+.time-selector span:first-child {
+  padding-right: 5px;
+  border-right: 1px solid var(--med-gray-2);
+}
+
+.time-selector span:last-child {
+  padding-left: 5px;
+  border-left: 1px solid var(--med-gray-2);
+}
+
+.time-selector span:hover {
+  color: white;
+}
+
 /* Favorite Songs & Artists ---------------------------------------------- */
 
 #popularity {
@@ -292,7 +349,7 @@ h3 {
 .top-item {
   padding: 6px 15px;
   border-radius: 10px;
-  transition: background-color ease-out .1s;
+  transition: all ease-out .1s;
   cursor: pointer;
 }
 
@@ -339,11 +396,13 @@ h3 {
   transform: translateY(-50%);
 }
 
-.artist-img {
+/* Track Descriptors */
+
+/* .artist & .song used for JS selection */
+
+.artist {
   display: none;
 }
-
-/* Track Descriptors */
 
 .popular-description {
   display: flex;
@@ -362,8 +421,7 @@ h3 {
   color: var(--light-gray);
 }
 
-.artist {
-  display: none;
+.artist-full {
   font-size: 25px;
   font-weight: 500;
 }
@@ -375,167 +433,75 @@ h3 {
   white-space: nowrap;
 }
 
-
 /* Expanded Track Information */
 
-.track-card {
+.popular-expanded {
   display: none;
-  flex-flow: column nowrap;
-  align-items: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  width: 70vw;
-  max-width: 500px;
-  height: 90vh;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(150, 150, 150, 0.2);
-  background: rgba(20, 20, 20, 0.7);
-  background: -moz-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
-  background: -webkit-linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
-  background: linear-gradient(0deg, var(--card-bg) 0%, rgba(20, 20, 20, 1) 100%);
-  z-index: 4; 
-  overflow-y: scroll;
-}
-
-.track-card > div {
-  position: relative;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  z-index: 5;
-}
-
-.track-card img {
-  position: relative;
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  margin: 50px 0 25px;
-}
-
-.track-overview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-}
-
-.track-header {
-  width: 50%;
-  padding-right: 10px;
-  text-align: right;
-  border-right: 1px solid white;
-}
-
-.card-list-count {
-  position: absolute;
-  align-self: flex-end;
-  margin-right: 3%;
-  font-size: 19pt;
-  font-weight: 500;
-}
-
-.hash {
-  font-size: 16pt;
-  margin-right: 3px;
-  font-weight: 300;
-}
-
-.listen-time { 
-  font-size: 15px;
-  color: var(--light-gray);
-}
-
-.artist-count {
-  display: none;
-}
-
-.track-overview > .listen-freq {
-  width: 50%;
-  margin-left: 7px;
-}
-
-#chart-container {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px 20px;
   margin-top: 20px;
-  padding: 15px;
-  width: 95%;
-  background-color: black;
-  border-radius: 15px;
-  box-sizing: border-box;
+  padding: 0 20px 30px;
 }
 
-#overviewChart {
-  width: 420px;
-  height: 200px;
+.expanded {
+  background-color: var(--dark-gray);
+  transition: background-color .1s eae-out;
 }
 
-.time-selector {
-  align-self: flex-end;
-  color: var(--med-gray);
-  margin: 10px 50px 0 0;
-  font-size: 15px;
+.expanded:hover {
+  background-color: var(--interact-gray);
+}
+
+.close-expand {
+
+}
+
+/* Track Descriptions */
+
+.info-label {
+  color: var(--light-gray-2);
+  font-size: 14px;
   font-weight: 300;
 }
 
-.time-selector span {
-  cursor: pointer;
-  transition: color ease-out .15s;
+.info-description {
+  font-weight: 300;
+  font-size: 16px;
 }
 
-.time-selector span:first-child {
-  padding-right: 5px;
-  border-right: 1px solid var(--med-gray-2);
+.album-link {
+  text-decoration: none;
+  color: var(--white);
+  border-bottom: 1px solid white;
+  transition: color .1s ease-out, border-bottom .1s ease-out;
 }
 
-.time-selector span:last-child {
-  padding-left: 5px;
-  border-left: 1px solid var(--med-gray-2);
-}
-
-.time-selector span:hover {
-  color: white;
-}
-
-.track-card .time-selector {
-  align-self: center;
-  margin: 5px;
-  padding: 2px 30px;
-  border-radius: 5px;
-  color: var(--light-gray);
-  background-color: rgba(0,0, 0, .2);
-}
-
-.track-card .time-selector span:first-child {
-  border-right: 1px solid var(--light-gray);
-}
-
-.track-card .time-selector span:last-child {
-  border-left: 1px solid var(--light-gray);
-}
-
-.active-time {
+.album-link:hover {
   color: var(--sp-green);
-  font-size: 17px;
-  font-weight: 700;
+  border-bottom: 1px solid var(--sp-green);
 }
 
-.active-time:hover {
-  color: var(--sp-green) !important;
+/* Song & Arist Charts */
+
+.track-chart-outer {
+  width: 100%;
+  height: 100%;
+  grid-column: 1/-1;
 }
 
 .track-chart-container {
-  width: 90%;
-  padding: 0px 15px;
+  position: relative;
+  height: 200px;
+  padding: 20px;
+  border-radius: 20px;
   box-sizing: border-box;
-  background-color: rgba(0,0,0,0);
-  border-radius: 5px;
+  background-color: black;
 }
+
+.time-selector-track {
+  margin: 10px;
+}
+
 
 @media only screen and (max-width: 1730px) {
   #layout-container {
@@ -640,7 +606,7 @@ h3 {
     color: var(--light-gray);
   }
 
-  .artist {
+  .artist-full {
     font-size: 19px;
   }
 
@@ -662,6 +628,10 @@ h3 {
 
   .overview-caption {
     margin: 0 10px 40px;
+  }
+
+  .track-chart-outer {
+    width: 100%;
   }
 }
 
@@ -703,10 +673,6 @@ h3 {
   }
 
   .popular-item > .listen-freq {
-    display: none;
-  }
-
-  .artist-count {
     display: none;
   }
 

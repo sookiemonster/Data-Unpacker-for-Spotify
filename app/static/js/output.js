@@ -15,21 +15,29 @@ $(document).ready(function () {
 
   // List Counters
 
-  var longest_counter = $(".popular-item").each(function(index) {
-    $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
-  }).last().children(".list-count");
-  
-  // Equalize Counter Width
-
-  $(".popular-item .list-count").width(longest_counter.width());
-
   $(".card-list-count").each(function(index) {
     $(this).append(index + 1);
   });
 
+  var longest_counter = $(".popular-item").each(function(index) {
+    $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
+  }).last().children(".list-count");
+
+  // Equalize Counter Width
+
+  $(".popular-item .list-count").width(longest_counter.width());
+
+  // Truncate-Text via Adjusting Width
+
+  // $(window).on("resize", function() {
+  //   $(".clip-container").each(function(index) {
+  //     $(this).width($(".popular-description").width());
+  //   });
+  // }).resize();
+
   // Track & Artist Toggle
 
-  $(".artist, .artist-img, .artist-count").hide();
+  $(".artist").hide();
 
   $("#icon-image").filter(function() {
     return $(this).attr('src')==='';
@@ -40,98 +48,95 @@ $(document).ready(function () {
   }).hide();
 
   $("#artist-select").click(function() {
-    if($(window).width() > 500){
-      $(".artist-count").show();
-    }  
 
-    $(".song-title, .song-artist, .track-img, .track-count, .clip-container").hide();
-    $(".artist, .artist-img").show();
-    $("#popular-header").html("Your Favorite Artists");
+    $(".song").hide();
+    $(".artist").show();
+
     $("#artist-select").addClass("active-button");
     $("#song-select").removeClass("active-button");
+
+    $("#popular-header").html("Your Favorite Artists");
   });
 
   $("#song-select").click(function() {
-    if($(window).width() > 500){
-      $(".track-count").show();
-    }
 
-    $(".artist, .artist-count, .artist-img").hide();
-    $(".song-title, .song-artist, .track-img, .clip-container").show();
-    $("#popular-header").html("Your Favorite Songs");
+    $(".artist").hide();
+    $(".song").show();
+
     $("#song-select").addClass("active-button");
     $("#artist-select").removeClass("active-button");
+
+    $("#popular-header").html("Your Favorite Songs");
   });
 
-  // Track Count Toggle
+  // Toggle Track Information
+    
+    $(".top-item").click(function(event) {
+        var $target = $(event.target);
+        if (!$("#popularity").is(':animated')) {
+          if (!$(this).hasClass("expanded")) {
+            
+            // Expand info 
+            $(this).addClass("expanded").children(".popular-expanded").css("display", "grid").hide().fadeIn(200);
+
+          } else if (!$target.hasClass("clickable") && !$target.closest(".clickable").length) {
+
+            // Close Info
+            $(this).removeClass("expanded").children(".popular-expanded").hide();    
+          }
+        }
+      });
   
-  $(window).on("resize",function() {  
-    if($(window).width() <= 500) {
-      $(".popular item .track-count").hide();
-      $(".popular item .artist-count").hide();
-    } else {
-      if ($("#song-select").hasClass("active-button")) {
-        $(".track-count").show();
-      } else {
-        $(".artist-count").show();
-      }
+  // Toggle Album Link
+
+  $(".album-link").each(function() {
+    if ($(this).attr("href") == "" || value == undefined) {
+      $(this).hide();
     }
   });
 
-  // Track Card Open
-
-  $(".top-item").click(function() {
-    if (!$("#popularity").is(':animated')) {
-        var card = $(this).children(".track-card");
-        var img;
+  // $(".top-item").click(function() {
+  //   if (!$("#popularity").is(':animated')) {
+  //       var card = $(this).children(".track-card");
+  //       var img;
     
-        if (card.is(":hidden")) {
-          $(".track-card").hide();
-          card.css("display", "flex").hide().fadeIn(200);
-          if ($("#song-select").hasClass("active-button")) {
-            card.find(".track-count").show();
-            img = card.children(".track-img")[0];
+  //       if (card.is(":hidden")) {
+  //         $(".track-card").hide();
+  //         card.css("display", "flex").hide().fadeIn(200);
+  //         if ($("#song-select").hasClass("active-button")) {
+  //           card.find(".track-count").show();
+  //           img = card.children(".track-img")[0];
     
-            // Update Charts
-            card.find(".active-time")[0].onclick();
-          } else {
-            card.find(".artist-count").show();
-            img = card.children(".artist-img")[0];
+  //           // Update Charts
+  //           card.find(".active-time")[0].onclick();
+  //         } else {
+  //           card.find(".artist-count").show();
+  //           img = card.children(".artist-img")[0];
     
-            // Update Charts
-            card.find(".active-time")[0].onclick();
-          }
-          // Style Track Card Background
-          // Color-Thief: https://github.com/lokesh/color-thief
+  //           // Update Charts
+  //           card.find(".active-time")[0].onclick();
+  //         }
+  //         // Style Track Card Background
+  //         // Color-Thief: https://github.com/lokesh/color-thief
           
-          var col;
+  //         var col;
     
-          if (img.complete) {
-            const colorThief = new ColorThief();
-            col = colorThief.getColor(img);
-            $("html").attr("style", "--card-bg: rgba(" + 
-              col[0] + ", " + col[1] + ", " + col[2] + ", 1)");
-          } 
-          else {
-            img.addEventListener('load', function() {
-              col = colorThief.getColor(img);
-              $("html").attr("style", "--card-bg: rgba(" + 
-                col[0] + ", " + col[1] + ", " + col[2] + ", 1");
-            });
-          }
+  //         if (img.complete) {
+  //           const colorThief = new ColorThief();
+  //           col = colorThief.getColor(img);
+  //           $("html").attr("style", "--card-bg: rgba(" + 
+  //             col[0] + ", " + col[1] + ", " + col[2] + ", 1)");
+  //         } 
+  //         else {
+  //           img.addEventListener('load', function() {
+  //             col = colorThief.getColor(img);
+  //             $("html").attr("style", "--card-bg: rgba(" + 
+  //               col[0] + ", " + col[1] + ", " + col[2] + ", 1");
+  //           });
+  //         }
     
-        }
-      }
-    });
-
-  // Track Card Close
-
-  $(document).click(function(event) { 
-    var $target = $(event.target);
-    if(!$target.closest(".top-item").length && 
-      $(".track-card").is(":visible")) {
-        $(".track-card").fadeOut(200);
-      }        
-  });
+  //       }
+  //     }
+  //   });
 
 });
