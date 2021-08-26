@@ -502,6 +502,23 @@ h3 {
   margin: 10px;
 }
 
+/* Artist Top Tracks */
+
+.genre {
+  grid-column: 1/-1;
+}
+
+.artist-top-track {
+  grid-column: 1/-1;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.artist-top-track .popular-description {
+  width: auto;
+}
 
 @media only screen and (max-width: 1730px) {
   #layout-container {

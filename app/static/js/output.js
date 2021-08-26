@@ -15,10 +15,6 @@ $(document).ready(function () {
 
   // List Counters
 
-  $(".card-list-count").each(function(index) {
-    $(this).append(index + 1);
-  });
-
   var longest_counter = $(".popular-item").each(function(index) {
     $(this).prepend('<span class="list-count"><span class="bullet">#</span>' + (index + 1) + "</span>");
   }).last().children(".list-count");
@@ -26,6 +22,15 @@ $(document).ready(function () {
   // Equalize Counter Width
 
   $(".popular-item .list-count").width(longest_counter.width());
+
+  // Artist Top Song Counter
+
+  $(".popular-expanded").each(function() {
+    console.log($(this));
+    $(this).find(".list-count").each(function(index) {
+      $(this).text(index + 1);
+    });
+  });
 
   // Truncate-Text via Adjusting Width
 
@@ -56,6 +61,8 @@ $(document).ready(function () {
     $("#song-select").removeClass("active-button");
 
     $("#popular-header").html("Your Favorite Artists");
+
+    $(".time-selector-track .over-week:visible").click();
   });
 
   $("#song-select").click(function() {
@@ -67,6 +74,8 @@ $(document).ready(function () {
     $("#artist-select").removeClass("active-button");
 
     $("#popular-header").html("Your Favorite Songs");
+
+    $(".time-selector-track .over-week:visible").click();
   });
 
   // Toggle Track Information
