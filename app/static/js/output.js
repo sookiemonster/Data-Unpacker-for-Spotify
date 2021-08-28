@@ -26,7 +26,6 @@ $(document).ready(function () {
   // Artist Top Song Counter
 
   $(".popular-expanded").each(function() {
-    console.log($(this));
     $(this).find(".list-count").each(function(index) {
       $(this).text(index + 1);
     });
@@ -55,6 +54,7 @@ $(document).ready(function () {
   $("#artist-select").click(function() {
 
     $(".song").hide();
+    if ($(window).width())
     $(".artist").show();
 
     $("#artist-select").addClass("active-button");

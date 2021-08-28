@@ -254,6 +254,8 @@ mark {
 
 #popularity {
   width: 1000px;
+  max-width: 100%;
+  box-sizing: border-box;
   height: 100%;
   padding: 35px 32px;
   animation: slide-from-bottom var(--transition-time) ease;
@@ -452,11 +454,11 @@ h3 {
   background-color: var(--interact-gray);
 }
 
-.close-expand {
-
-}
-
 /* Track Descriptions */
+
+.overflowFrequency {
+  display: none;
+}
 
 .info-label {
   color: var(--light-gray-2);
@@ -528,12 +530,11 @@ h3 {
 
   #overview {
     width: 100%;
-    box-sizing: border-box;
   }
 
-  small {
-    margin-left: auto;
-    margin-right: auto;
+  #overview > small {
+    align-self: center;
+    text-align: center;
   }
 }
 
@@ -594,24 +595,11 @@ h3 {
   }
 
   #popularity {
-    padding: 0 20px;
     margin: 20px 0;
-    box-sizing: border-box;
   }
 
   .popular-description {
     width: 100%;
-  }
-
-  ol {
-    padding: 0px 15px;
-    margin: 2px 0;
-  }
-
-  ol li::before {
-    box-sizing: border-box;
-    width: 30px;
-    font-size: 18px;
   }
 
   .song-title {
@@ -629,7 +617,6 @@ h3 {
 
   .listen-freq {
     font-size: 12pt;
-    padding-left: 5px;
   }
 
 }
@@ -659,38 +646,24 @@ h3 {
   }
 
   h3 {
-    margin: 0 auto 10px auto;
+    margin: 0 20px 10px;
+    align-self: center;
   }
 
   #heart {
     display: none;
   }
 
-  .button-container {
-    margin: 0;
-  }
-  
-  .popular-item {
-    width: 300px;
-  }
-
 }
 
 @media only screen and (max-width: 500px) {
-  ol li {
-    margin: 0;
-  }
 
-  .clip-container {
-    width: 80%;
-  }
-
-  .popular-item {
-    width: 200px;
-  }
-
-  .popular-item > .listen-freq {
+  .listen-freq {
     display: none;
+  }
+
+  .overflowFrequency {
+    display: block;
   }
 
 }
