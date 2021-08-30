@@ -14,7 +14,7 @@ $(document).ready(function() {
     $("#file-page").addClass("slide-right");
 
     setTimeout(function() {
-      $("#info-page").fadeIn(500);
+      $("#info-page").css("display", "grid").hide().fadeIn(500);
     }, 250);
   });
 

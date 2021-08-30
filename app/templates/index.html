@@ -5,7 +5,7 @@
     <meta name="application-name" content="Data Unpacker for Spotify">
     <meta name="description" content="See What You're Listening To">
     <meta name="keywords" content="Spotify">
-    <link rel="icon" type="image/ico" href="../static/images/favicon.ico">
+    <link rel="icon" type="image/ico" href="../static/images/favicon_2.ico">
 
     <meta property="og:title" content="Data Unpacker for Spotify">
     <meta property="og:description" content="See What You're Listening To">
@@ -26,6 +26,7 @@
   </head>
   <body>
     <div id="info-page">
+      <h2 id="info-header">ABOUT</h2>
       <svg id="close-button" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 701.02 701.02" style="enable-background:new 0 0 701.02 701.02;"
         xml:space="preserve">
         <path d="M683.13,104.67L104.67,683.13c-23.86,23.86-62.91,23.86-86.77,0l0,0c-23.86-23.86-23.86-62.91,0-86.77
@@ -34,11 +35,56 @@
           c-23.86-23.86-23.86-62.91,0-86.77l0,0C41.76-5.97,80.81-5.97,104.67,17.9z"/>
       </svg>
       <div class="info-text">
-        <h2>ABOUT US</h2>
         <p>
-          Data Unpacker for Spotify is a summer project by sookiemonster, SayaDuck, and shushu. The idea came from the noticeable lack of straightforward tools to visualize the downloadable data package, along with a desire to see our own statistics.
+          Data Unpacker for Spotify is a web application that
+          visualizes the user data package provided to 
+          Spotify listeners. It was created on July 12th, 2021 
+          with the intent of developing an easy and intuitive way
+          to view trends in our listening tendencies and specific 
+          information about those trends. 
+        </p>
+        <p>
+          This application was built with built with HTML, CSS, 
+          JQuery, Jinja & <a class="ref-link" href="">Flask</a>. It also implements <a class="ref-link" href="">Chart.js</a> for graphs.
+        </p>
+        <p>
+          Within this application you can upload your data package 
+          to view your top 10 most listened to songs & artists, how
+          many times you've listened to them & 
+          when you tend to listen to them over a given interval.
+          You can also observe those statistics for music in general.
+        </p><br>
+        <p class="note">
+          <i>
+            <b>NOTE:</b> 
+            While this is more in-depth 
+            than many other applications that utilize Spotify's 
+            recently played music, the data package 
+            still only dates back a year, so it may not be 
+            fully representative of your entire Spotify listening history.
+          </i>
+        </p>
 
-          The app is made in Flask and uses the Chart.js library for listening trends.
+        <span class="sub-header">Credits</span>
+        <p>
+          This project wouldn't be possible without:
+          <div class="author-container">
+            <img class="author-image" src="https://avatars.githubusercontent.com/u/71859934?v=4">
+            <a class="author-description" href="https://github.com/sookiemonster">
+              Sookiemonster
+            </a>
+            
+            <img class="author-image" src="https://avatars.githubusercontent.com/u/54008448?v=4">
+            <a class="author-description" href="https://github.com/notsorandomalias">
+              ShuShu
+            </a>
+
+            <img class="author-image" src="https://avatars.githubusercontent.com/u/16601189?v=4">
+            <a class="author-description" href="https://github.com/SayaDuck">
+              SayaDuck
+            </a>
+          </div>
+        </p>
 
           <!-- (add links to github profiles, flask, and chart.js) -->
 
