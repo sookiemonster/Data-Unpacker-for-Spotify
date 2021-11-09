@@ -11,6 +11,7 @@ Spotify Account Settings -> Privacy Settings
 
 
 ## Setting up 
+Make sure you have set up your spotify API credentials! [This](https://spotipy.readthedocs.io/en/2.8.0/#authorization-code-flow) provides some details on how to do so.
 ```bash
 # Get repo
 git clone https://github.com/sookiemonster/Data-Unpacker-for-Spotify.git
