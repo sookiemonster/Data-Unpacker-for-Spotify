@@ -20,10 +20,10 @@ cd Data-Unpacker-for-Spotify
 <b>Highly suggested to run this in a virtual environment</b>
 ```bash
 pip install virtualenv
-python3 -m venv venv
+python3 -m virtualenv venv
 ```
 ```bash
-source ./venv/Scripts/Activate # Linux/macOS/Git Bash
+source ./venv/bin/activate # Linux/macOS/Git Bash
 ```
 ```bash
 .\venv\Scripts\Activate # Windows CMD
