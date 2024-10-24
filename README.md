@@ -2,6 +2,8 @@
 
 
 Visualizes the Spotify 1-year data package from 
+![image](https://github.com/user-attachments/assets/a621b76f-f93e-4d3e-a943-792ed3547257)
+![image](https://github.com/user-attachments/assets/64028bf7-84e0-4f36-8f25-5e660a439bdf)
 
 ```
 Spotify Account Settings -> Privacy Settings
